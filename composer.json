@@ -13,7 +13,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "ext-pdo_firebird": "*",
-        "php_interbase.dll":""
+        "ext-php_interbase.dll":""
     },
     "require-dev": {
         "facade/ignition": "^2.5",
