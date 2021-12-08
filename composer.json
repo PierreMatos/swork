@@ -10,10 +10,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "harrygulliford/laravel-firebird": "^2.4",
         "laravel/framework": "^8.65",
-        "laravel/sanctum": "^2.11",
+        "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.5",
-        "ext-pdo_firebird": "*",
-        "ext-php_interbase.dll":"*"
+        "ext-pdo_firebird": "2.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
