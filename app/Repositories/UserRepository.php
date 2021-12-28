@@ -10,7 +10,8 @@ class UserRepository
     public function all() 
     {
 
-        $users = DB::table('API_USER_NEW')->get();
+        dd('ola');
+        $users = DB::table('API_USER_ACTIVATE')->get();
         return $users;
     }
 
