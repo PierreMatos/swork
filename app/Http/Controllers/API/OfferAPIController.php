@@ -24,11 +24,35 @@ class OfferAPIController extends BaseController
         $date = $request->date ?? 'NULL';
 
         $offers = $this->offerRepository->offersList($date);
+                 
+        // $allOffers = collect();
 
-        return($offers[0]->OFFER_AD_TITLE);
-        
-        return json_encode($offers);
+        foreach ($offers as $offer){
 
+            $allOffers = collect( [
+                'id' => $offer->OFFER_ID,
+                'year' => $offer->RECRUITMENT_YEAR,
+                'number' => $offer->RECRUITMENT_NUMBER,
+                'group' => $offer->RECRUITMENT_GROUP,
+                'job' => $offer->OFFER_JOB,
+                'title' => $offer->OFFER_AD_TITLE,
+                'text' => $this->convertUTF8($offer->OFFER_AD_TEXT), // charset convert
+            ]);
+            
+        }
+
+        return json_encode($allOffers);
+    }
+    
+    public function convertUTF8($data) {
+
+        if(!empty($data)) {    
+        $encodeType = mb_detect_encoding($data , array('UTF-8','GBK','LATIN1','BIG5'));   
+            if( $encodeType != 'UTF-8'){   
+                $data = mb_convert_encoding($data ,'utf-8' , $encodeType);   
+            }   
+        }   
+        return $data;    
     }
 
 }
