@@ -27,6 +27,10 @@ class OfferAPIController extends BaseController
                  
         // $allOffers = collect();
 
+        $input = $request->collect();
+       $offersArray = collect([]);
+
+
         foreach ($offers as $offer){
 
             $allOffers = collect( [
@@ -34,25 +38,37 @@ class OfferAPIController extends BaseController
                 'year' => $offer->RECRUITMENT_YEAR,
                 'number' => $offer->RECRUITMENT_NUMBER,
                 'group' => $offer->RECRUITMENT_GROUP,
-                'job' => $offer->OFFER_JOB,
-                'title' => $offer->OFFER_AD_TITLE,
+                'job' => $this->convertUTF8($offer->OFFER_JOB),
+                'title' => $this->convertUTF8($offer->OFFER_AD_TITLE),
                 'text' => $this->convertUTF8($offer->OFFER_AD_TEXT), // charset convert
             ]);
+
+            $offersArray->push($allOffers);
+            
             
         }
 
-        return json_encode($allOffers);
+        // return($offers[0]->OFFER_AD_TITLE);
+// return($offersArray->toJson());
+//         return ($offersArray->toJson());
+        return ($offersArray);
+        
+        return($offers[0]->OFFER_AD_TITLE);
+        return json_encode($offers[0]->OFFER_AD_TITLE);
+        return json_encode($offers);
+
     }
     
     public function convertUTF8($data) {
-
-        if(!empty($data)) {    
-        $encodeType = mb_detect_encoding($data , array('UTF-8','GBK','LATIN1','BIG5'));   
+          if(!empty($data)) {    
+            $encodeType = mb_detect_encoding($data , array('UTF-8','GBK','LATIN1','BIG5'));   
             if( $encodeType != 'UTF-8'){   
-                $data = mb_convert_encoding($data ,'utf-8' , $encodeType);   
+            
+              $data = mb_convert_encoding($data ,'utf-8' , $encodeType); 
+            //   $data = mb_convert_encoding($data, "ISO-8859-1", "UTF-8" );
             }   
-        }   
-        return $data;    
-    }
+          }   
+          return $data;    
+        }
 
 }
