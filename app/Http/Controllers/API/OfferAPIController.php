@@ -45,17 +45,39 @@ class OfferAPIController extends BaseController
 
             $offersArray->push($allOffers);
             
-            
         }
 
-        // return($offers[0]->OFFER_AD_TITLE);
-// return($offersArray->toJson());
-//         return ($offersArray->toJson());
         return ($offersArray);
         
-        return($offers[0]->OFFER_AD_TITLE);
-        return json_encode($offers[0]->OFFER_AD_TITLE);
-        return json_encode($offers);
+
+    }
+    
+    
+        public function show($id)
+    {
+
+
+        $offer = $this->offerRepository->offerShow($id);
+
+        // $input = $request->collect();
+       $offersArray = collect([]);
+
+
+            $allOffer = collect( [
+                'id' => $offer->OFFER_ID,
+                'year' => $offer->RECRUITMENT_YEAR,
+                'number' => $offer->RECRUITMENT_NUMBER,
+                'group' => $offer->RECRUITMENT_GROUP,
+                'job' => $this->convertUTF8($offer->OFFER_JOB),
+                'title' => $this->convertUTF8($offer->OFFER_AD_TITLE),
+                'text' => $this->convertUTF8($offer->OFFER_AD_TEXT), // charset convert
+            ]);
+
+            
+
+
+        return ($allOffer);
+        
 
     }
     

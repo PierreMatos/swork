@@ -21,8 +21,9 @@ class Controller extends BaseController
 
     public function get()
     {
-        // $users = $this->userRepository->offersList();
-        $users = $this->userRepository->userInfo();
-        return json_encode($users);
+        $users = $this->userRepository->all();
+        
+        dd($users);
+        return $users;
     }
 }
