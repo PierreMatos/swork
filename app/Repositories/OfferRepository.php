@@ -84,7 +84,7 @@ class OfferRepository
     
         // lista todas  categoria profissional "Construção"
 
-    public function OffersListByJob($date, $job) 
+    public function jobs($date, $job) 
     {
 
         $offers = DB::select("SELECT DISTINCT FROM CATEGORIAS_PROFISSIONAIS");
