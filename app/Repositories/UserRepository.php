@@ -93,7 +93,7 @@ class UserRepository
 
 
 
-    // Job Experience
+    // Job Experience.
     
     public function addJobExperience($USER_NIF, $USER_PASS, $USER_EMAIL, $COMPANY, $JOB, $START_DATE, $END_DATE) 
     {
