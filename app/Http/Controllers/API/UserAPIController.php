@@ -64,7 +64,7 @@ class UserAPIController extends BaseController
         $NIF = $request->nif ?? '';
 
         // $user = $this->userRepository->userActivate($NIF);
-        $user = $this->userRepository->userGet($NIF);
+        $user = $this->userRepository->userGet($NIF)[0];
 
         return ($user);
     }
@@ -73,7 +73,6 @@ class UserAPIController extends BaseController
     public function update($id, Request $request)
     {
 
-
         $USER_NIF = $request->USER_NIF ?? '';
         $NEW_PASS = $request->USER_PASS ?? '';
         $USER_EMAIL = $request->USER_EMAIL ?? '';
@@ -81,8 +80,8 @@ class UserAPIController extends BaseController
         $USER_ADRESS_1 = $request->USER_ADRESS_1 ?? '';
         $USER_ADDRESS_2 = $request->USER_ADDRESS_2 ?? '';
         $USER_POSTAL_CODE = $request->USER_POSTAL_CODE ?? '';
-        $USER_TELEPHONE = $request->USER_TELEPHONE ?? null;
-        $USER_BIRTHDATE = $request->USER_BIRTHDATE ?? null;
+        $USER_TELEPHONE = $request->USER_TELEPHONE ?? '';
+        $USER_BIRTHDATE = $request->USER_BIRTHDATE ?? '';
         $USER_SOCIAL_SECURITY_NUMBER = $request->USER_SOCIAL_SECURITY_NUMBER ?? '';
         $USER_COUNTRY_ID = $request->USER_COUNTRY_ID ?? '';
         $USER_QUALIFICATION_ID = $request->USER_QUALIFICATION_ID ?? '';
@@ -149,7 +148,6 @@ class UserAPIController extends BaseController
     public function getWorkingHours(Request $request)
     {
          $user = $this->userRepository->getWorkingHours($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
-         
          return json_encode($user);
     }
 
@@ -166,7 +164,8 @@ class UserAPIController extends BaseController
     
     public function getWorkingAreas(Request $request)
     {
-         $user = $this->userRepository->getWorkingAreas($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
+        
+        $user = $this->userRepository->getWorkingAreas($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
         //  dd($user);
          return json_encode($user);
     }
@@ -179,6 +178,16 @@ class UserAPIController extends BaseController
          return json_encode($user);
     }
     
+   
+    // Job Categories
+
+    public function getJobCategories(Request $request)
+    {
+        
+        $user = $this->userRepository->listJobCategories($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
+        //  dd($user);
+            return json_encode($user);
+    }
     
     public function login(Request $request)
     {
@@ -345,7 +354,45 @@ class UserAPIController extends BaseController
         return ($abilitiesArray);
         
     }
+
+      // Job Experience
+      public function addUserAbilities (Request $request){
+        
+        $user = $this->userRepository->addUserAbilities($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL, $request->ABILITY_ID);
+       
+        return json_encode($user);
+    }
+
+    public function userAbilities (Request $request)
+    {
+
+        $abilities = $this->userRepository->listUserAbilities($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
+
+        // return json_encode($abilities);
+        
+        $abilitiesArray = collect([]);
+
+        foreach ($abilities as $ability){
+
+            $all = collect( [
+                'CODIGO_CONHECIMENTO' => ($ability->USER_LANGUAGE_ID),
+                'DESCRICAO' => $this->convertUTF8($ability->USER_LANGUAGE),
+            ]);
+
+            $abilitiesArray->push($all);
+            
+        }
+
+        return ($abilitiesArray);
+        
+    }
     
+    public function destroyAbilities (Request $request){
+        
+        $user = $this->userRepository->deleteUserAbilities($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
+       
+        return json_encode($user);
+    }
     
     public function documentTypes (Request $request)
     {

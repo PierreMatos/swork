@@ -43,11 +43,18 @@ Route::GET('counties', 'App\Http\Controllers\API\UserAPIController@counties');
 Route::GET('locations', 'App\Http\Controllers\API\UserAPIController@locations');
 Route::GET('skills', 'App\Http\Controllers\API\UserAPIController@skills');
 Route::GET('abilities', 'App\Http\Controllers\API\UserAPIController@abilities');
+Route::GET('userAbilities', 'App\Http\Controllers\API\UserAPIController@userAbilities');
+Route::POST('userAbilities', 'App\Http\Controllers\API\UserAPIController@addUserAbilities');
+Route::DELETE('userAbilities', 'App\Http\Controllers\API\UserAPIController@destroyAbilities');
 Route::GET('documentTypes', 'App\Http\Controllers\API\UserAPIController@documentTypes');
 Route::GET('workingHours', 'App\Http\Controllers\API\UserAPIController@getWorkingHours');
 Route::PATCH('workingHours', 'App\Http\Controllers\API\UserAPIController@updateWorkingHours');
 Route::GET('workingAreas', 'App\Http\Controllers\API\UserAPIController@getWorkingAreas');
 Route::PATCH('workingAreas', 'App\Http\Controllers\API\UserAPIController@updateWorkingAreas');
+Route::GET('documentTypes', 'App\Http\Controllers\API\UserAPIController@documentTypes');
+
+Route::GET('jobcategories', 'App\Http\Controllers\API\UserAPIController@getJobCategories');
+
 
 
 Route::POST('uploadfile', 'App\Http\Controllers\API\UserAPIController@uploadFile');

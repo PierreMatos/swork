@@ -63,16 +63,17 @@ class UserRepository
   
     // Atualizar  informações de utilizador 
 
-    public function userUpdate($USER_NIF, $USER_PASS, $USER_EMAIL, $USER_NAME, $USER_ADDRESS_1, $USER_ADDRESS_2, $USER_POSTAL_CODE, $USER_TELEPHONE, $USER_BIRTHDATE,
-    $USER_SOCIAL_SECURITY_NUMBER, $USER_COUNTRY_ID, $USER_QUALIFICATION_ID, $USER_DISTRICT_ID, $USER_COUNTY_ID, $USER_LOCAL_ID, $TEM_VIATURA, $TEM_CARTA_CONDUCAO,
-    $USER_TIPO_COMUNICACAO, $USER_RECEBE_NOTICIAS, $USER_ACEITA_CONDICOES) 
+    public function userUpdate($USER_NIF, $USER_PASS, $USER_EMAIL, $USER_NAME, $USER_ADDRESS_1, $USER_ADDRESS_2,
+    $USER_POSTAL_CODE, $USER_TELEPHONE, $USER_BIRTHDATE, $USER_SOCIAL_SECURITY_NUMBER, $USER_COUNTRY_ID, $USER_QUALIFICATION_ID,
+    $USER_DISTRICT_ID, $USER_COUNTY_ID, $USER_LOCAL_ID, $TEM_VIATURA, $TEM_CARTA_CONDUCAO, $USER_TIPO_COMUNICACAO, $USER_RECEBE_NOTICIAS,
+     $USER_ACEITA_CONDICOES) 
     {
 
         DB::beginTransaction();
 
-        $user = DB::select("SELECT * FROM API_USER_UPDATE('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$USER_NAME', '$USER_ADDRESS_1', '$USER_ADDRESS_2', '$USER_POSTAL_CODE', $USER_TELEPHONE,
-        '$USER_BIRTHDATE', $USER_SOCIAL_SECURITY_NUMBER, $USER_COUNTRY_ID, $USER_QUALIFICATION_ID, $USER_DISTRICT_ID, $USER_COUNTY_ID, $USER_LOCAL_ID, $TEM_VIATURA,
-        $TEM_CARTA_CONDUCAO, $USER_TIPO_COMUNICACAO, $USER_RECEBE_NOTICIAS, $USER_ACEITA_CONDICOES )");
+        $user = DB::select("SELECT * FROM API_USER_UPDATE('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$USER_NAME', '$USER_ADDRESS_1', '$USER_ADDRESS_2', '$USER_POSTAL_CODE', '$USER_TELEPHONE',
+        '$USER_BIRTHDATE', '$USER_SOCIAL_SECURITY_NUMBER', '$USER_COUNTRY_ID', '$USER_QUALIFICATION_ID', '$USER_DISTRICT_ID', '$USER_COUNTY_ID', '$USER_LOCAL_ID', '$TEM_VIATURA',
+        '$TEM_CARTA_CONDUCAO', '$USER_TIPO_COMUNICACAO', '$USER_RECEBE_NOTICIAS', '$USER_ACEITA_CONDICOES' )");
        
         DB::commit();
 
@@ -93,7 +94,7 @@ class UserRepository
 
 
 
-    // Job Experience.
+    // Job Experience
     
     public function addJobExperience($USER_NIF, $USER_PASS, $USER_EMAIL, $COMPANY, $JOB, $START_DATE, $END_DATE) 
     {
@@ -316,7 +317,7 @@ class UserRepository
 
         DB::beginTransaction();
 
-        $abilities = DB::select("SELECT * FROM EMPREGADOS_CONHECIMENTOS_TPS");
+        $abilities = DB::select("SELECT * FROM EMPREGADOS_CONHECIMENTOS_TPS WHERE CODIGO_GRUPO_TIPO_CONHECIMENTO = 1");
        
         DB::commit();
 
@@ -324,6 +325,66 @@ class UserRepository
 
     }
 
+    // Lista de abilities do user
+
+    public function listUserAbilities($USER_NIF, $USER_PASS, $USER_EMAIL)
+    {
+
+        DB::beginTransaction();
+
+        $abilities = DB::select("SELECT * FROM API_USER_LANGUAGES_GET($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
+       
+        DB::commit();
+
+        return $abilities;
+
+    }
+
+    // Lista de abilities do user
+
+    public function addUserAbilities($USER_NIF, $USER_PASS, $USER_EMAIL, $ABILITY_ID)
+    {
+
+        DB::beginTransaction();
+
+        $abilities = DB::select("SELECT * FROM API_USER_LANGUAGES_NEW($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$ABILITY_ID')");
+       
+        DB::commit();
+
+        return $abilities;
+
+    }
+
+    // Apagar de abilities do user
+
+    public function deleteUserAbilities($USER_NIF, $USER_PASS, $USER_EMAIL)
+    {
+
+        DB::beginTransaction();
+
+        $abilities = DB::select("SELECT * FROM API_USER_LANGUAGES_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
+       
+        DB::commit();
+
+        return $abilities;
+
+    }
+
+
+        // Lista areas de interesse
+
+        public function listJobCategories($USER_NIF, $USER_PASS, $USER_EMAIL)
+        {
+
+            DB::beginTransaction();
+    
+            $abilities = DB::select("SELECT * FROM API_USER_JOB_CATEGORIES_GET ($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
+           
+            DB::commit();
+    
+            return $abilities;
+    
+        }
 
 
     // Lista de tipos de documentos 
