@@ -58,5 +58,3 @@ Route::GET('jobcategories', 'App\Http\Controllers\API\UserAPIController@getJobCa
 
 
 Route::POST('uploadfile', 'App\Http\Controllers\API\UserAPIController@uploadFile');
-
-
