@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Storage;
+
 
 class UserAPIController extends BaseController
 {
@@ -194,8 +196,7 @@ class UserAPIController extends BaseController
 
         $NIF = $request->nif ?? '';
         $PASS = $request->pass ?? '';
-
-        $user = $this->userRepository->userUpdate($NIF,$PASS);
+        $user = $this->userRepository->login($NIF,$PASS);
 
         return json_encode($user);
     }
@@ -422,10 +423,30 @@ class UserAPIController extends BaseController
     
     public function uploadFile(Request $request){
         
+        // if ($request->hasFile('file')) {
+        //     $logo = $request->file;
+        //     $fileName = date('Y') . $logo->getClientOriginalName();
+    
+        // //Get the path to the folder where the image is stored 
+        // //and then save the path in database
+        //     $path = $request->file->storeAs('file', $fileName, 'public');
+        //     $found['logo'] = $path;
+        // }
+
+        // // originalName realPath
+        // $fileContent = file_get_contents($path);
+        // // dd($fileContent);
+        // $path = storage_path() . ($request->file)->getClientOriginalName();
+        // // dd (file_get_contents($path));
+        // $path = storage_path() . "/json/${filename}.json";
+
+        // $json = json_decode(file_get_contents($path), true); 
         
-        // dd(($request->file));
-        $documentTypes = $this->userRepository->uploadFile($request->nif,$request->pass, $request->email, $request->filename,  $request->cod, $request->file );
-        dd($documentTypes);
+        // ']['tmp_name']);
+        // dd(($request->file('file')));
+        // dd(($request->file)->getClientOriginalName());
+        $documentTypes = $this->userRepository->uploadFile($request->nif,$request->pass, $request->email, $request->filename, $request->cod, $request->file );
+        // dd($documentTypes);
         
     }
     

@@ -71,8 +71,10 @@ class UserRepository
 
         DB::beginTransaction();
 
-        $user = DB::select("SELECT * FROM API_USER_UPDATE('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$USER_NAME', '$USER_ADDRESS_1', '$USER_ADDRESS_2', '$USER_POSTAL_CODE', '$USER_TELEPHONE',
-        '$USER_BIRTHDATE', '$USER_SOCIAL_SECURITY_NUMBER', '$USER_COUNTRY_ID', '$USER_QUALIFICATION_ID', '$USER_DISTRICT_ID', '$USER_COUNTY_ID', '$USER_LOCAL_ID', '$TEM_VIATURA',
+        $user = DB::select("SELECT * FROM API_USER_UPDATE('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$USER_NAME', '$USER_ADDRESS_1',
+         '$USER_ADDRESS_2', '$USER_POSTAL_CODE', '$USER_TELEPHONE',
+        '$USER_BIRTHDATE', '$USER_SOCIAL_SECURITY_NUMBER', '$USER_COUNTRY_ID', '$USER_QUALIFICATION_ID', '$USER_DISTRICT_ID',
+         '$USER_COUNTY_ID', '$USER_LOCAL_ID', '$TEM_VIATURA',
         '$TEM_CARTA_CONDUCAO', '$USER_TIPO_COMUNICACAO', '$USER_RECEBE_NOTICIAS', '$USER_ACEITA_CONDICOES' )");
        
         DB::commit();
@@ -211,7 +213,7 @@ class UserRepository
 
         DB::beginTransaction();
 
-        $user = DB::select("SELECT * FROM API_USER_LOGIN($NIF, $PASS)");
+        $user = DB::select("SELECT * FROM API_USER_LOGIN('$NIF', '$PASS')");
 
         DB::commit();
 
@@ -402,13 +404,25 @@ class UserRepository
 
     }
     
+    //TODO select first 10 skip 0 from api_user_timesheet_get
+
         //LOAD FROM FILE
         public function uploadFile($NIF, $PASS, $EMAIL, $FILENAME, $CODIGO_CLASSIFICACAO, $FILE) 
     {
+        $connection = ibase_connect(env('DB_DATABASE'), env('DB_USERNAME'), env('DB_PASSWORD'), 'utf-8', '100');
 
-        $fileContent = file_get_contents($FILE);
-        
-        $offers = DB::select("SELECT * FROM API_USER_ATTACHMENTS_NEW('$NIF', '$PASS', '$EMAIL', '$FILENAME', '$CODIGO_CLASSIFICACAO', '$fileContent' ");
+        $nome_ficheiro = $FILE;
+        $tmpFile = $FILE->makeTmpFile();
+        $fileContent = file_get_contents($tmpFile);
+        // dd($FILE['tmp_name']);
+
+        // $data = file_get_contents($FILE['perfil_curriculo']['tmp_name']);
+        // dd('HEY');
+        $blh = ibase_blob_create($connection);
+        ibase_blob_add($blh, $data);
+        $blobid = ibase_blob_close($blh);
+
+        $offers = DB::select("SELECT * FROM API_USER_ATTACHMENTS_NEW('$NIF', '$PASS', '$EMAIL', '$FILENAME', '$CODIGO_CLASSIFICACAO', '$blobid' ");
         //ORDER BY RECRUITMENT_GROUP
         return $offers;
 

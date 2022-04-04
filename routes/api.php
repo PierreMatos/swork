@@ -55,6 +55,18 @@ Route::GET('documentTypes', 'App\Http\Controllers\API\UserAPIController@document
 
 Route::GET('jobcategories', 'App\Http\Controllers\API\UserAPIController@getJobCategories');
 
-
-
 Route::POST('uploadfile', 'App\Http\Controllers\API\UserAPIController@uploadFile');
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login2', 'App\Http\Controllers\Auth\AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
+});
