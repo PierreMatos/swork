@@ -57,6 +57,17 @@ Route::GET('jobcategories', 'App\Http\Controllers\API\UserAPIController@getJobCa
 
 Route::POST('uploadfile', 'App\Http\Controllers\API\UserAPIController@uploadFile');
 
+// colaborador
+Route::GET('timesheet', 'App\Http\Controllers\API\UserAPIController@getTimesheet');
+Route::GET('payroll', 'App\Http\Controllers\API\UserAPIController@getPayroll');
+Route::GET('payrollpdf', 'App\Http\Controllers\API\UserAPIController@getPayrollPDF');
+Route::GET('medicine', 'App\Http\Controllers\API\UserAPIController@getMedicine');
+Route::GET('contracts', 'App\Http\Controllers\API\UserAPIController@getContracts');
+Route::GET('contractpdf', 'App\Http\Controllers\API\UserAPIController@getContractPDF');
+Route::GET('recruitments', 'App\Http\Controllers\API\UserAPIController@getRecruitments');
+
+
+
 Route::group([
 
     'middleware' => 'api',

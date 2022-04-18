@@ -168,7 +168,6 @@ class UserAPIController extends BaseController
     {
         
         $user = $this->userRepository->getWorkingAreas($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
-        //  dd($user);
          return json_encode($user);
     }
 
@@ -176,7 +175,6 @@ class UserAPIController extends BaseController
     public function updateWorkingAreas(Request $request)
     {
          $user = $this->userRepository->updateWorkingAreas($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL, $request->USER_WORKING_AREAS_ID, $request->USER_WORKING_AREAS_SELECTED);
-// DD($request->USER_WORKING_AREAS_ID);
          return json_encode($user);
     }
     
@@ -186,9 +184,25 @@ class UserAPIController extends BaseController
     public function getJobCategories(Request $request)
     {
         
-        $user = $this->userRepository->listJobCategories($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
-        //  dd($user);
-            return json_encode($user);
+        $jobs = $this->userRepository->listJobCategories($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
+        
+        $jobsArray = collect([]);
+
+        foreach ($jobs as $job){
+
+            $all = collect( [
+                'USER_JOB_CATEGORY_ID' => $job->USER_JOB_CATEGORY_ID,
+                'USER_JOB_CATEGORY_DESCRIPTION' => $this->convertUTF8($job->USER_JOB_CATEGORY_DESCRIPTION),
+                'USER_JOB_CATEGORY_SELECTED' =>($job->USER_JOB_CATEGORY_SELECTED),
+                'USER_JOB_CATEGORY_PARENT_ID' => ($job->USER_JOB_CATEGORY_PARENT_ID),
+            ]);
+
+            $jobsArray->push($all);
+            
+        }
+
+        //  dd($jobsArray);
+            return json_encode($jobsArray);
     }
     
     public function login(Request $request)
@@ -215,11 +229,6 @@ class UserAPIController extends BaseController
             $all = collect( [
                 'CODIGO_PAIS' => $country->CODIGO_PAIS,
                 'DESCRICAO' => $this->convertUTF8($country->DESCRICAO),
-                // 'NACIONALIDADE' => $this->convertUTF8($country->NACIONALIDADE),
-                // 'SIGLA' => $this->convertUTF8($country->SIGLA),
-                // 'INDICATIVO_TELEFONICO' => $this->convertUTF8($country->INDICATIVO_TELEFONICO),
-                // 'title' => $this->convertUTF8($offer->OFFER_AD_TITLE),
-                // 'text' => $this->convertUTF8($offer->OFFER_AD_TEXT), // charset convert
             ]);
 
             $countriesArray->push($all);
@@ -266,14 +275,15 @@ class UserAPIController extends BaseController
             $all = collect( [
                 'CODIGO_DISTRITO' => $this->convertUTF8($county->CODIGO_DISTRITO),
                 'CODIGO_CONCELHO' => $this->convertUTF8($county->CODIGO_CONCELHO),
-                'DESCRICAO' => $this->convertUTF8($county->DESCRICAO),
+                'DESCRICAO' => $this->convertUTF8($county->DESCRICAO_API),
                 // 'NACIONALIDADE' => $this->convertUTF8($country->NACIONALIDADE),
                 
             ]);
-
+            
             $countiesArray->push($all);
             
         }
+        // dd($countiesArray);
 
         return ($countiesArray);
         
@@ -420,7 +430,87 @@ class UserAPIController extends BaseController
         
     }
     
-    
+    public function getTimesheet (Request $request){
+
+        $timesheets = $this->userRepository->getTimeSheet($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL, $request->DATE_FROM, $request->DATE_TO);
+
+        $timesheetArray = collect([]);
+
+        foreach ($timesheets as $timesheet){
+
+            $all = collect( [
+                "TIMESHEET_ID" => $timesheet->TIMESHEET_ID,
+                "TIMESHEET_DATE_TIME_IN" => $timesheet->TIMESHEET_DATE_TIME_IN,
+                "TIMESHEET_DATE_TIME_OUT" => $timesheet->TIMESHEET_DATE_TIME_OUT,
+                "TIMESHEET_CLIENT" => $this->convertUTF8($timesheet->TIMESHEET_CLIENT),
+                "TIMPSHEET_CATEGORY" => $this->convertUTF8($timesheet->TIMPSHEET_CATEGORY),
+                "TIMESHEET_DESCRIPTION" => $this->convertUTF8($timesheet->TIMESHEET_DESCRIPTION),
+                "TIMESHEET_TOTAL_HOURS" => $timesheet->TIMESHEET_TOTAL_HOURS,
+                "TIMESHEET_DAYS" => $timesheet->TIMESHEET_DAYS,
+                "TIMESHEET_UNIT_VALUE" => $timesheet->TIMESHEET_UNIT_VALUE,
+                "TIMESHEET_UNIT_TYPE" => $timesheet->TIMESHEET_UNIT_TYPE,
+                "TIMESHEET_TOTAL_VALUE" => $timesheet->TIMESHEET_TOTAL_VALUE
+                
+            ]);
+
+            $timesheetArray->push($all);
+            
+        }
+
+        return json_encode($timesheetArray);
+
+    }
+
+    public function getPayroll (Request $request){
+        
+        $payroll = $this->userRepository->getPayroll($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL, $request->DATE_FROM, $request->DATE_TO);
+       
+        return json_encode($payroll);
+    }
+
+    public function getPayrollPDF (Request $request){
+        
+        $payrollPDF = $this->userRepository->getPayrollPDF($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL, $request->PAYROLL_YEAR, $request->PAYROLL_NUMBER);
+
+        return json_encode($payrollPDF);
+    }
+
+    public function getMedicine (Request $request){
+        
+        $medicine = $this->userRepository->getMedicine($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
+
+        return json_encode($medicine);
+    }
+
+    public function getContracts (Request $request){
+        
+        $contracts = $this->userRepository->getContracts($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
+
+        return json_encode($contracts);
+    }
+
+    public function getRecruitments (Request $request){
+        
+        $recruitments = $this->userRepository->getRecruitments($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL, $request->DATE_FROM, $request->DATE_TO);
+
+        return json_encode($recruitments);
+    }
+
+    //TODO Verificar se faz download no axios
+    public function getContractPDF (Request $request){
+        
+        $contractPDF = $this->userRepository->getContractPDF($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL, $request->CONTRACT_YEAR, $request->CONTRACT_AGENCY, $request->CONTRACT_NUMBER);
+        
+        //The path and filename that you want to save the file to.
+        $fileName = 'logo.png';
+         
+        //Save the data using file_put_contents.
+        $save = file_put_contents($fileName,$contractPDF[0]);
+        // $fullblob = file_get_contents($contractPDF[0]);
+		
+        return json_encode($contractPDF);
+    }
+
     public function uploadFile(Request $request){
         
         // if ($request->hasFile('file')) {

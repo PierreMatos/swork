@@ -266,7 +266,7 @@ class UserRepository
         
         DB::beginTransaction();
 
-        $counties = DB::select("SELECT * FROM CONCELHOS $whereClause ");
+        $counties = DB::select("SELECT CODIGO_DISTRITO, CODIGO_CONCELHO, DESCRICAO_API FROM CONCELHOS $whereClause ");
        
         DB::commit();
 
@@ -405,6 +405,98 @@ class UserRepository
     }
     
     //TODO select first 10 skip 0 from api_user_timesheet_get
+
+    public function getTimeSheet($USER_NIF, $USER_PASS, $USER_EMAIL, $DATE_FROM, $DATE_TO)
+    {
+
+        DB::beginTransaction();
+
+        $timesheet = DB::select("SELECT * FROM API_USER_TIMESHEET_GET ('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$DATE_FROM', '$DATE_TO')");
+       
+        DB::commit();
+
+        return $timesheet;
+
+    }
+
+    
+    public function getPayroll($USER_NIF, $USER_PASS, $USER_EMAIL, $DATE_FROM, $DATE_TO)
+    {
+
+        DB::beginTransaction();
+
+        $payroll = DB::select("SELECT * FROM API_USER_PAYROLL_GET ('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$DATE_FROM', '$DATE_TO')");
+       
+        DB::commit();
+
+        return $payroll;
+
+    }
+
+    public function getPayrollPDF($USER_NIF, $USER_PASS, $USER_EMAIL, $PAYROLL_YEAR, $PAYROLL_NUMBER)
+    {
+
+        DB::beginTransaction();
+
+        $payrollPDF = DB::select("SELECT * FROM API_USER_PAYROLL_PDF_GET ('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$PAYROLL_YEAR', '$PAYROLL_NUMBER')");
+       
+        DB::commit();
+
+        return $payrollPDF;
+
+    }
+
+    public function getMedicine($USER_NIF, $USER_PASS, $USER_EMAIL)
+    {
+
+        DB::beginTransaction();
+
+        $medicine = DB::select("SELECT * FROM API_USER_MEDICINE_GET ('$USER_NIF', '$USER_PASS', '$USER_EMAIL')");
+       
+        DB::commit();
+
+        return $medicine;
+
+    }
+
+    public function getContracts($USER_NIF, $USER_PASS, $USER_EMAIL)
+    {
+
+        DB::beginTransaction();
+
+        $contracts = DB::select("SELECT * FROM API_USER_CONTRACTS_GET ('$USER_NIF', '$USER_PASS', '$USER_EMAIL')");
+       
+        DB::commit();
+
+        return $contracts;
+
+    }
+
+    public function getRecruitments($USER_NIF, $USER_PASS, $USER_EMAIL, $DATE_FROM, $DATE_TO)
+    {
+
+        DB::beginTransaction();
+
+        $recruitments = DB::select("SELECT * FROM API_USER_RECRUITMENTS_GET ('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$DATE_FROM', '$DATE_TO')");
+       
+        DB::commit();
+
+        return $recruitments;
+
+    }
+
+    public function getContractPDF($USER_NIF, $USER_PASS, $USER_EMAIL, $CONTRACT_YEAR, $CONTRACT_AGENCY, $CONTRACT_NUMBER)
+    {
+
+        DB::beginTransaction();
+
+        $payrollPDF = DB::select("SELECT * FROM API_USER_CONTRACTS_PDF_GET ('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$CONTRACT_YEAR', '$CONTRACT_AGENCY', '$CONTRACT_NUMBER')");
+       
+        DB::commit();
+
+        return $payrollPDF;
+
+    }
 
         //LOAD FROM FILE
         public function uploadFile($NIF, $PASS, $EMAIL, $FILENAME, $CODIGO_CLASSIFICACAO, $FILE) 
