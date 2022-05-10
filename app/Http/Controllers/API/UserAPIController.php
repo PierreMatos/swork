@@ -65,10 +65,20 @@ class UserAPIController extends BaseController
 
         $NIF = $request->nif ?? '';
 
-        // $user = $this->userRepository->userActivate($NIF);
         $user = $this->userRepository->userGet($NIF)[0];
 
-        return ($user);
+        $collection = collect($user);
+
+        $collection->transform(function($item, $key) {
+            if ($key == 'USER_QUALIFICATION'){
+                $this->convertUTF8($item);
+            }else {
+                return $item;
+            }
+        });
+
+
+        return ($collection);
     }
 
 
@@ -126,7 +136,6 @@ class UserAPIController extends BaseController
     public function getJobExperience (Request $request){
         
         $user = $this->userRepository->getJobExperience($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
-       
         return json_encode($user);
     }
 
@@ -157,7 +166,6 @@ class UserAPIController extends BaseController
     public function updateWorkingHours(Request $request)
     {
          $user = $this->userRepository->updateWorkingHours($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL, $request->USER_WORKING_HOURS_ID, $request->USER_WORKING_HOURS_SELECTED);
-        
          return json_encode($user);
     }
     
@@ -167,8 +175,23 @@ class UserAPIController extends BaseController
     public function getWorkingAreas(Request $request)
     {
         
-        $user = $this->userRepository->getWorkingAreas($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
-         return json_encode($user);
+        $jobs = $this->userRepository->getWorkingAreas($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
+        
+        $jobsArray = collect([]);
+
+        foreach ($jobs as $job){
+
+            $all = collect( [
+                'USER_WORKING_AREAS_ID' => $job->USER_WORKING_AREAS_ID,
+                'USER_WORKING_AREAS_DESCRIPTION' => $this->convertUTF8($job->USER_WORKING_AREAS_DESCRIPTION),
+                'USER_WORKING_AREAS_SELECTED' =>($job->USER_WORKING_AREAS_SELECTED),
+            ]);
+
+            $jobsArray->push($all);
+            
+        }
+        // dd($user);
+         return json_encode($jobsArray);
     }
 
 
@@ -179,6 +202,21 @@ class UserAPIController extends BaseController
     }
     
    
+    // ESCALAS DE TRABALHO
+    public function getWorkShifts(Request $request)
+    {
+         $user = $this->userRepository->getWorkShifts($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL, $request->CODIG_CATEGORIA, $request->CODIGO_CENTRO_CUSTO, $request->ANO, $request->MES);
+         return json_encode($user);
+    }
+
+    // ESCALAS DE TRABALHO
+    public function updateWorkShifts(Request $request)
+    {
+         $user = $this->userRepository->updateWorkShifts($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL, $request->USER_WORK_SHIFT_NUMBER, $request->USER_WORK_SHIFT_LINE_NUMBER, 
+            $request->USER_WORK_SHIFT_LOCAL_ID, $request->USER_WORK_SHIFT_START_DATE, $request->USER_WORK_SHIFT_STATE, $request->USER_WORK_SHIFT_JUSTIFICATION);
+         return json_encode($user);
+    }
+
     // Job Categories
 
     public function getJobCategories(Request $request)
@@ -201,7 +239,7 @@ class UserAPIController extends BaseController
             
         }
 
-        //  dd($jobsArray);
+        //  dd($jobs);
             return json_encode($jobsArray);
     }
     
@@ -531,11 +569,18 @@ class UserAPIController extends BaseController
         // $path = storage_path() . "/json/${filename}.json";
 
         // $json = json_decode(file_get_contents($path), true); 
-        
+
+
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($_FILES["file"]["name"]);
+        // dd($request->file);
+        $FILE = file_get_contents($request->file);
+
+        // DD($FILE);
         // ']['tmp_name']);
         // dd(($request->file('file')));
         // dd(($request->file)->getClientOriginalName());
-        $documentTypes = $this->userRepository->uploadFile($request->nif,$request->pass, $request->email, $request->filename, $request->cod, $request->file );
+        $documentTypes = $this->userRepository->uploadFile($request->nif,$request->pass, $request->email, $request->filename, $request->cod, $FILE );
         // dd($documentTypes);
         
     }

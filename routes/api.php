@@ -65,6 +65,8 @@ Route::GET('medicine', 'App\Http\Controllers\API\UserAPIController@getMedicine')
 Route::GET('contracts', 'App\Http\Controllers\API\UserAPIController@getContracts');
 Route::GET('contractpdf', 'App\Http\Controllers\API\UserAPIController@getContractPDF');
 Route::GET('recruitments', 'App\Http\Controllers\API\UserAPIController@getRecruitments');
+Route::GET('workshifts', 'App\Http\Controllers\API\UserAPIController@getWorkShifts');
+Route::PATCH('updateworkshifts', 'App\Http\Controllers\API\UserAPIController@updateWorkShifts');
 
 
 

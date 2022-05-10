@@ -205,7 +205,35 @@ class UserRepository
         return $abilities;
 
     }
-    
+
+    // ESCALAS DE TRABALHO
+    public function getWorkShifts($USER_NIF, $USER_PASS, $USER_EMAIL, $CODIG_CATEGORIA, $CODIGO_CENTRO_CUSTO, $ANO, $MES)
+    {
+
+        DB::beginTransaction();
+
+        $abilities = DB::select("SELECT * FROM API_USER_WORK_SHIFT_GET ($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$CODIG_CATEGORIA', '$CODIGO_CENTRO_CUSTO', '$ANO', '$MES')");
+       
+        DB::commit();
+
+        return $abilities;
+
+    }
+
+    // ESCALAS DE TRABALHO
+    public function updateWorkShifts($USER_NIF, $USER_PASS, $USER_EMAIL, $USER_WORK_SHIFT_NUMBER, $USER_WORK_SHIFT_LINE_NUMBER, $USER_WORK_SHIFT_LOCAL_ID, $USER_WORK_SHIFT_START_DATE, $USER_WORK_SHIFT_STATE, $USER_WORK_SHIFT_JUSTIFICATION)
+    {
+
+        DB::beginTransaction();
+
+        $abilities = DB::select("SELECT * FROM API_USER_WORK_SHIFT_UPDATE ($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$USER_WORK_SHIFT_NUMBER', 
+            '$USER_WORK_SHIFT_LINE_NUMBER', '$USER_WORK_SHIFT_LOCAL_ID', '$USER_WORK_SHIFT_START_DATE', '$USER_WORK_SHIFT_STATE', '$USER_WORK_SHIFT_JUSTIFICATION')");
+       
+        DB::commit();
+
+        return $abilities;
+
+    }
     // Login de utilizador 
 
     public function login($NIF, $PASS) 
@@ -501,11 +529,16 @@ class UserRepository
         //LOAD FROM FILE
         public function uploadFile($NIF, $PASS, $EMAIL, $FILENAME, $CODIGO_CLASSIFICACAO, $FILE) 
     {
+        DB::beginTransaction();
+
         $connection = ibase_connect(env('DB_DATABASE'), env('DB_USERNAME'), env('DB_PASSWORD'), 'utf-8', '100');
 
-        $nome_ficheiro = $FILE;
-        $tmpFile = $FILE->makeTmpFile();
-        $fileContent = file_get_contents($tmpFile);
+        // fbird_blob_create($FILE)
+        // move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $FILE);
+        $abc = fbird_blob_create($FILE);
+        // $nome_ficheiro = $FILE;
+        // $tmpFile = $FILE->makeTmpFile();
+        $fileContent = file_get_contents($FILE);
         // dd($FILE['tmp_name']);
 
         // $data = file_get_contents($FILE['perfil_curriculo']['tmp_name']);
@@ -514,7 +547,14 @@ class UserRepository
         ibase_blob_add($blh, $data);
         $blobid = ibase_blob_close($blh);
 
-        $offers = DB::select("SELECT * FROM API_USER_ATTACHMENTS_NEW('$NIF', '$PASS', '$EMAIL', '$FILENAME', '$CODIGO_CLASSIFICACAO', '$blobid' ");
+        dd($FILE);
+        // $target_dir = "uploads/";
+        // $target_file = $target_dir . basename($_FILES["file"]["name"]);
+        // $abc = move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+        
+        $offers = DB::select("SELECT * FROM API_USER_ATTACHMENTS_NEW('$NIF', '$PASS', '$EMAIL', '$FILENAME', '$CODIGO_CLASSIFICACAO', '$FILE' ");
+        DB::commit();
+
         //ORDER BY RECRUITMENT_GROUP
         return $offers;
 
