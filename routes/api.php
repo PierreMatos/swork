@@ -55,6 +55,31 @@ Route::GET('documentTypes', 'App\Http\Controllers\API\UserAPIController@document
 
 Route::GET('jobcategories', 'App\Http\Controllers\API\UserAPIController@getJobCategories');
 
-
-
 Route::POST('uploadfile', 'App\Http\Controllers\API\UserAPIController@uploadFile');
+
+// colaborador
+Route::GET('timesheet', 'App\Http\Controllers\API\UserAPIController@getTimesheet');
+Route::GET('payroll', 'App\Http\Controllers\API\UserAPIController@getPayroll');
+Route::GET('payrollpdf', 'App\Http\Controllers\API\UserAPIController@getPayrollPDF');
+Route::GET('medicine', 'App\Http\Controllers\API\UserAPIController@getMedicine');
+Route::GET('contracts', 'App\Http\Controllers\API\UserAPIController@getContracts');
+Route::GET('contractpdf', 'App\Http\Controllers\API\UserAPIController@getContractPDF');
+Route::GET('recruitments', 'App\Http\Controllers\API\UserAPIController@getRecruitments');
+Route::GET('workshifts', 'App\Http\Controllers\API\UserAPIController@getWorkShifts');
+Route::PATCH('updateworkshifts', 'App\Http\Controllers\API\UserAPIController@updateWorkShifts');
+
+
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login2', 'App\Http\Controllers\Auth\AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
+});
