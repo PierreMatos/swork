@@ -347,7 +347,7 @@ class UserAPIController extends BaseController
     public function show(Request $request)
     {
 
-        // $NIF = Auth::user()[0]->NIF_UTILIZADOR ?? '';
+        // $NIF = Auth::user()->NIF_UTILIZADOR ?? '';
         $NIF = Auth::user()->NIF_UTILIZADOR ?? '';
 
         $user = $this->userRepository->userGet($NIF)[0];
@@ -394,6 +394,9 @@ class UserAPIController extends BaseController
             if ($key == 'USER_DISTRICT'){
                 return ($this->convertUTF8($item));
             }
+            if ($key == 'USER_QUALIFICATION'){
+                return ($this->convertUTF8($item));
+            }
             if ($key == 'USER_ADDRESS_2'){
                 if ($item == "")
                 return null;
@@ -411,7 +414,6 @@ class UserAPIController extends BaseController
 
     public function update(Request $request)
     {
-
 
         // TODO VALIDAR DADOS
         // $USER_NIF = $request->USER_NIF ?? '';
@@ -439,7 +441,7 @@ class UserAPIController extends BaseController
 
         // return json_encode($USER_SOCIAL_SECURITY_NUMBER);
 
-        $userId = Auth::user()[0]->NIF_UTILIZADOR;
+        $userId = Auth::user()->NIF_UTILIZADOR;
         $userUpdate = User::findOrFail($userId);
         
         // return json_encode($user2);
@@ -450,14 +452,14 @@ class UserAPIController extends BaseController
 
             $userAuth = Auth::user()[0];
 
-            if ($request->input('PASS_UTILIZADOR')) {
+            // if ($request->input('PASS_UTILIZADOR')) {
 
                 // $pw = Hash::make($request->input('PASS_UTILIZADOR'));
     
                 // $request->request->set('PASS_UTILIZADOR', $pw);
-            }
-
-            $userUpdate->fill($request->input())->save();
+                // }
+                
+                $userUpdate->fill($request->input())->save();
 
             // $userUpdate->update([
             //     // 'NIF_UTILIZADOR' => $request->input('USER_NIF'),
@@ -511,9 +513,8 @@ class UserAPIController extends BaseController
     
     
     // Job Experience
-    public function addJobExperience (Request $request){
+    public function postJobExperience (Request $request){
         
-        // dd('heh');
         
         $validator = Validator::make($request->all(), [
             'COMPANY' => 'required',
@@ -530,17 +531,17 @@ class UserAPIController extends BaseController
         }
         
         if (Auth::user()){
-
+            
             $jobExperience = $this->userRepository->addJobExperience(
-                Auth::user()[0]->NIF_UTILIZADOR, 
-                Auth::user()[0]->PASS_UTILIZADOR, 
-                Auth::user()[0]->EMAIL_UTILIZADOR,
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR,
                 $request->COMPANY, 
                 $request->JOB, 
                 $request->START_DATE, 
                 $request->END_DATE);
-
-        }
+                
+            }
         
         return json_encode($jobExperience);
     }
@@ -550,9 +551,9 @@ class UserAPIController extends BaseController
         if (Auth::user()){
             
             $jobExperiences = $this->userRepository->getJobExperience(
-                Auth::user()[0]->NIF_UTILIZADOR, 
-                Auth::user()[0]->PASS_UTILIZADOR, 
-                Auth::user()[0]->EMAIL_UTILIZADOR);
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR);
 
         }
             
@@ -576,9 +577,9 @@ class UserAPIController extends BaseController
                 if (is_null($jobExperience['JOB_EXPERIENCE_ID'])) {
                     
                     $queryJobExperience = $this->userRepository->addJobExperience(
-                        Auth::user()[0]->NIF_UTILIZADOR, 
-                        Auth::user()[0]->PASS_UTILIZADOR, 
-                        Auth::user()[0]->EMAIL_UTILIZADOR,
+                        Auth::user()->NIF_UTILIZADOR, 
+                        Auth::user()->PASS_UTILIZADOR, 
+                        Auth::user()->EMAIL_UTILIZADOR,
                         $jobExperience['USER_EXPERIENCE_COMPANY'],
                         $jobExperience['USER_EXPERIENCE_FUNCTION'],
                         $jobExperience['USER_EXPERIENCE_FROM_DATE'],
@@ -591,9 +592,9 @@ class UserAPIController extends BaseController
 
                   
                     $queryJobExperience = $this->userRepository->updateJobExperience(
-                        Auth::user()[0]->NIF_UTILIZADOR, 
-                        Auth::user()[0]->PASS_UTILIZADOR, 
-                        Auth::user()[0]->EMAIL_UTILIZADOR, 
+                        Auth::user()->NIF_UTILIZADOR, 
+                        Auth::user()->PASS_UTILIZADOR, 
+                        Auth::user()->EMAIL_UTILIZADOR, 
                         $jobExperience['JOB_EXPERIENCE_ID'], 
                         $jobExperience['USER_EXPERIENCE_COMPANY'],
                         $jobExperience['USER_EXPERIENCE_FUNCTION'],
@@ -611,9 +612,9 @@ class UserAPIController extends BaseController
 
 
                 $queryJobExperience = $this->userRepository->updateJobExperience(
-                    Auth::user()[0]->NIF_UTILIZADOR, 
-                    Auth::user()[0]->PASS_UTILIZADOR, 
-                    Auth::user()[0]->EMAIL_UTILIZADOR, 
+                    Auth::user()->NIF_UTILIZADOR, 
+                    Auth::user()->PASS_UTILIZADOR, 
+                    Auth::user()->EMAIL_UTILIZADOR, 
                     $lastValue['JOB_EXPERIENCE_ID'], 
                     $lastValue['USER_EXPERIENCE_COMPANY'],
                     $lastValue['USER_EXPERIENCE_FUNCTION'],
@@ -633,9 +634,9 @@ class UserAPIController extends BaseController
     public function destroyJobExperience (Request $request){
         
         $user = $this->userRepository->deleteJobExperience( 
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR, 
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR, 
             $request->JOB_EXPERIENCE_ID);
        
         return json_encode($user);
@@ -649,9 +650,9 @@ class UserAPIController extends BaseController
         if (Auth::user()){
 
             $workingHours = $this->userRepository->getWorkingHours(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR);
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR);
 
         }
 
@@ -704,12 +705,16 @@ class UserAPIController extends BaseController
     }
 
 
-    public function updateWorkingHours(Request $request)
+    public function patchWorkingHours(Request $request)
     {
 
         $workingHours = $request->input();
 
         $resultsCollection = collect([]);
+        $hoursCollection = collect($workingHours);
+        
+        
+        // return json_encode($resultsCollection->keys()->last());
 
         foreach ($workingHours as $key => $workingHour){
 
@@ -719,12 +724,25 @@ class UserAPIController extends BaseController
                     
     
                  $updateWorkingHours = $this->userRepository->updateWorkingHours(
-                    Auth::user()[0]->NIF_UTILIZADOR, 
-                    Auth::user()[0]->PASS_UTILIZADOR, 
-                    Auth::user()[0]->EMAIL_UTILIZADOR,
+                    Auth::user()->NIF_UTILIZADOR, 
+                    Auth::user()->PASS_UTILIZADOR, 
+                    Auth::user()->EMAIL_UTILIZADOR,
                     $key,
                     $workingHour === true ? 1: 0,
                     );
+
+                    if($key == $hoursCollection->keys()->last()){
+
+                        $updateWorkingHours = $this->userRepository->updateWorkingHours(
+                            Auth::user()->NIF_UTILIZADOR, 
+                            Auth::user()->PASS_UTILIZADOR, 
+                            Auth::user()->EMAIL_UTILIZADOR, 
+                            $key, 
+                            $workingHour === true ? 1: 0);
+
+                // $resultsCollection->push($updateWorkingHours , $key);
+
+                    }
 
                     $resultsCollection->push($updateWorkingHours , $key);
         
@@ -740,18 +758,7 @@ class UserAPIController extends BaseController
         // return json_encode($lastValue);
         $id = $workingHoursCollection->keys()->last();
         
-        // if($lastValue){
-
-            $updateWorkingHours = $this->userRepository->updateWorkingHours(
-                Auth::user()[0]->NIF_UTILIZADOR, 
-                Auth::user()[0]->PASS_UTILIZADOR, 
-                Auth::user()[0]->EMAIL_UTILIZADOR, 
-                $key, 
-                $lastValue === true ? 1: 0);
-
-                $resultsCollection->push($updateWorkingHours , $key);
-
-        // }
+       
 
          return json_encode($resultsCollection);
     }
@@ -766,9 +773,9 @@ class UserAPIController extends BaseController
         if (Auth::user()){
 
             $WorkingAreas = $this->userRepository->getWorkingAreas(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR);
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR);
 
         }
         
@@ -816,45 +823,51 @@ class UserAPIController extends BaseController
     }
 
 
-    public function updateWorkingAreas(Request $request)
+    public function patchWorkingAreas(Request $request)
     {
-        if (Auth::user()){
+
+        $resultsCollection = collect([]);
+
+        if (Auth::user() && !empty($request->input())){
         
         $workingAreas = $request->input();
-        $resultsCollection = collect([]);
         $workingAreasCollection = collect($workingAreas);
 
+        // return json_encode($workingAreasCollection->keys()->last());
         foreach ($workingAreas as $key => $workingArea) {
 
             $updateWorkingAreas = $this->userRepository->updateWorkingAreas(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR,
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR,
             $key,
             $workingArea === true ? 1: 0);
             // $request->USER_WORKING_AREAS_ID, $request->USER_WORKING_AREAS_SELECTED);
             $resultsCollection->push($updateWorkingAreas , $key);
 
-
-        }
-
-         //TODO check if this is needed
+                     //TODO check if this is needed
          $lastValue = last($workingAreas);
-         $id = $workingAreasCollection->keys()->last();
-            
-        //  if($lastValue){
+        //  return json_encode($key);
+        //  $id = $workingAreasCollection->keys()->last();
 
+          if($key == $workingAreasCollection->keys()->last()){
+            // return json_encode($key);
              $updateWorkingAreas = $this->userRepository->updateWorkingAreas(
-                 Auth::user()[0]->NIF_UTILIZADOR, 
-                 Auth::user()[0]->PASS_UTILIZADOR, 
-                 Auth::user()[0]->EMAIL_UTILIZADOR, 
+                 Auth::user()->NIF_UTILIZADOR, 
+                 Auth::user()->PASS_UTILIZADOR, 
+                 Auth::user()->EMAIL_UTILIZADOR, 
                  $key, 
-                 $lastValue === true ? 1: 0);
+                 $lastValue === true ? 1 : 0);
+                
+                }
 
                  $resultsCollection->push($updateWorkingAreas , $key);
 
 
-        //  }
+        }
+
+
+
 
         }
          return json_encode($resultsCollection);
@@ -867,9 +880,9 @@ class UserAPIController extends BaseController
         if (Auth::user()){
 
             $workshifts = $this->userRepository->getWorkShifts(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR, 
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR, 
             $request->CODIG_CATEGORIA, $request->CODIGO_CENTRO_CUSTO, $request->ANO, $request->MES);
         }
 
@@ -904,9 +917,9 @@ class UserAPIController extends BaseController
         if (Auth::user()){
 
             $user = $this->userRepository->updateWorkShifts(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR,  
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR,  
             $request->USER_WORK_SHIFT_NUMBER, $request->USER_WORK_SHIFT_LINE_NUMBER, 
             $request->USER_WORK_SHIFT_LOCAL_ID, $request->USER_WORK_SHIFT_START_DATE, 
             $request->USER_WORK_SHIFT_STATE, $request->USER_WORK_SHIFT_JUSTIFICATION);
@@ -918,9 +931,9 @@ class UserAPIController extends BaseController
     {
 
         $wslocals = $this->userRepository->getWorkShiftLocals(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR,
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR,
         );
         
         $wslocalsArray = collect([]);
@@ -948,9 +961,9 @@ class UserAPIController extends BaseController
     {
 
         $wsmonths = $this->userRepository->getWorkShiftMonths(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR,
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR,
         );
 
         $wsmonthsArray = collect([]);
@@ -973,9 +986,9 @@ class UserAPIController extends BaseController
     {
 
         $wsyears = $this->userRepository->getWorkShiftYears(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR,
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR,
         );
         
         return ($wsyears);
@@ -990,9 +1003,9 @@ class UserAPIController extends BaseController
         if (Auth::user()){
 
             $jobs = $this->userRepository->listJobCategories(
-                Auth::user()[0]->NIF_UTILIZADOR, 
-                Auth::user()[0]->PASS_UTILIZADOR, 
-                Auth::user()[0]->EMAIL_UTILIZADOR
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR
             );
         }
         // dd($jobs);
@@ -1038,7 +1051,7 @@ class UserAPIController extends BaseController
             return json_encode($jobsArray);
     }
  
-    public function updateJobCategories(Request $request) {
+    public function patchJobCategories(Request $request) {
 
         $jobCategories = $request->input('data');
 
@@ -1048,9 +1061,9 @@ class UserAPIController extends BaseController
         $resultsCollection = collect([]);
         // return json_encode($jobSelected['values0']);
         $jobs = $this->userRepository->listJobCategories(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR
         );
 
         $jobsCollection = collect($jobs);
@@ -1058,10 +1071,10 @@ class UserAPIController extends BaseController
         // check e gravar so os 1 e ver se os 0 mudaram
         foreach($jobsCollection as $job){
 
-            // return json_encode($selectedArray->has($job->USER_JOB_CATEGORY_ID));
-        //    $obj = ($selectedArray->has($job->USER_JOB_CATEGORY_ID)->first());
+                // return json_encode($selectedArray->has($job->USER_JOB_CATEGORY_ID));
+            //    $obj = ($selectedArray->has($job->USER_JOB_CATEGORY_ID)->first());
 
-        // $filtred = $selectedArray->contains($job->USER_JOB_CATEGORY_ID);
+            // $filtred = $selectedArray->contains($job->USER_JOB_CATEGORY_ID);
 
             if($selectedArray->contains($job->USER_JOB_CATEGORY_ID)){
                 // return json_encode($job->USER_JOB_CATEGORY_ID);
@@ -1071,12 +1084,12 @@ class UserAPIController extends BaseController
                 if ($job->USER_JOB_CATEGORY_SELECTED != 1) {
 
                     $updateWorkingHours = $this->userRepository->updateJobCategories(
-                        Auth::user()[0]->NIF_UTILIZADOR, 
-                        Auth::user()[0]->PASS_UTILIZADOR, 
-                        Auth::user()[0]->EMAIL_UTILIZADOR,
+                        Auth::user()->NIF_UTILIZADOR, 
+                        Auth::user()->PASS_UTILIZADOR, 
+                        Auth::user()->EMAIL_UTILIZADOR,
                         $job->USER_JOB_CATEGORY_ID,
                         1,
-                        true
+                        false
                         );
     
                         // return json_encode($job->USER_JOB_CATEGORY_ID);
@@ -1091,12 +1104,12 @@ class UserAPIController extends BaseController
                 if ($job->USER_JOB_CATEGORY_SELECTED != 0) {
 
                     $updateWorkingHours = $this->userRepository->updateJobCategories(
-                        Auth::user()[0]->NIF_UTILIZADOR, 
-                        Auth::user()[0]->PASS_UTILIZADOR, 
-                        Auth::user()[0]->EMAIL_UTILIZADOR,
+                        Auth::user()->NIF_UTILIZADOR, 
+                        Auth::user()->PASS_UTILIZADOR, 
+                        Auth::user()->EMAIL_UTILIZADOR,
                         $job->USER_JOB_CATEGORY_ID,
                         0,
-                        true
+                        false
                         );
 
                         $resultsCollection->push(['id' => $job->USER_JOB_CATEGORY_ID , 'value'=> 0, 'result' => $updateWorkingHours]);
@@ -1114,9 +1127,9 @@ class UserAPIController extends BaseController
         //             if (Auth::user()){
         
         //             $updateWorkingHours = $this->userRepository->updateJobCategories(
-        //                 Auth::user()[0]->NIF_UTILIZADOR, 
-        //                 Auth::user()[0]->PASS_UTILIZADOR, 
-        //                 Auth::user()[0]->EMAIL_UTILIZADOR,
+        //                 Auth::user()->NIF_UTILIZADOR, 
+        //                 Auth::user()->PASS_UTILIZADOR, 
+        //                 Auth::user()->EMAIL_UTILIZADOR,
         //                 $selected,
         //                 1,
         //                 );
@@ -1137,9 +1150,9 @@ class UserAPIController extends BaseController
         //         if (Auth::user()){
     
         //          $updateWorkingHours = $this->userRepository->updateJobCategories(
-        //             Auth::user()[0]->NIF_UTILIZADOR, 
-        //             Auth::user()[0]->PASS_UTILIZADOR, 
-        //             Auth::user()[0]->EMAIL_UTILIZADOR,
+        //             Auth::user()->NIF_UTILIZADOR, 
+        //             Auth::user()->PASS_UTILIZADOR, 
+        //             Auth::user()->EMAIL_UTILIZADOR,
         //             $notSelected,
         //             0,
         //             );
@@ -1380,6 +1393,7 @@ class UserAPIController extends BaseController
 
     public function addUserAbilities (Request $request){
 
+
         $validator = Validator::make($request->all(), [
             'abilities_array.*.CODIGO_CONHECIMENTO' => 'required',
         ]);
@@ -1391,13 +1405,16 @@ class UserAPIController extends BaseController
             return $validator->errors()->toJson();
         }
 
-        $abilities = $request->abilities_array;
+
+        $abilities = $request->abilities_array ?? [];
+        $abilitiesCollection = collect($abilities);
+
 
         //DELETE ALL
         $this->userRepository->deleteUserAbilities(
-                        Auth::user()[0]->NIF_UTILIZADOR, 
-                        Auth::user()[0]->PASS_UTILIZADOR, 
-                        Auth::user()[0]->EMAIL_UTILIZADOR
+                        Auth::user()->NIF_UTILIZADOR, 
+                        Auth::user()->PASS_UTILIZADOR, 
+                        Auth::user()->EMAIL_UTILIZADOR
         );
 
 
@@ -1412,9 +1429,9 @@ class UserAPIController extends BaseController
                     // return json_encode( $ability['CODIGO_CONHECIMENTO']);
                     $userAbilities = $this->userRepository->addUserAbilities(
                         // $request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL,
-                        Auth::user()[0]->NIF_UTILIZADOR, 
-                        Auth::user()[0]->PASS_UTILIZADOR, 
-                        Auth::user()[0]->EMAIL_UTILIZADOR,
+                        Auth::user()->NIF_UTILIZADOR, 
+                        Auth::user()->PASS_UTILIZADOR, 
+                        Auth::user()->EMAIL_UTILIZADOR,
                         $ability['CODIGO_CONHECIMENTO']
                         // $request->ABILITY_ID
                     );
@@ -1422,6 +1439,16 @@ class UserAPIController extends BaseController
                     $resultsArray->push($userAbilities, $ability['CODIGO_CONHECIMENTO']);
 
                 }
+
+                $userAbilities = $this->userRepository->addUserAbilities(
+                    // $request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL,
+                    Auth::user()->NIF_UTILIZADOR, 
+                    Auth::user()->PASS_UTILIZADOR, 
+                    Auth::user()->EMAIL_UTILIZADOR,
+                    $abilitiesCollection->last()['CODIGO_CONHECIMENTO']
+                    // $request->ABILITY_ID
+                );
+
 
         }
 
@@ -1468,9 +1495,9 @@ class UserAPIController extends BaseController
 
             $deleteAbilities = $this->userRepository->deleteUserAbilities(
                 // $request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL,
-                Auth::user()[0]->NIF_UTILIZADOR, 
-                Auth::user()[0]->PASS_UTILIZADOR, 
-                Auth::user()[0]->EMAIL_UTILIZADOR);
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR);
            
         }
 
@@ -1524,9 +1551,9 @@ class UserAPIController extends BaseController
         if (Auth::user()){
 
             $timesheets = $this->userRepository->getTimeSheet(
-                Auth::user()[0]->NIF_UTILIZADOR, 
-                Auth::user()[0]->PASS_UTILIZADOR, 
-                Auth::user()[0]->EMAIL_UTILIZADOR, 
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR, 
                 $request->DATE_FROM, 
                 $request->DATE_TO);
         }
@@ -1563,9 +1590,9 @@ class UserAPIController extends BaseController
         if(Auth::user()){
 
             $payrolls = $this->userRepository->getPayroll(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR,
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR,
             $request->DATE_FROM, 
             $request->DATE_TO);
         }
@@ -1623,9 +1650,9 @@ class UserAPIController extends BaseController
     public function offerApply (Request $request){
     
         $offers = $this->userRepository->offerApply(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR,
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR,
             $request->RECRUITMENT_REFERENCE);
             
         return json_encode($offers);
@@ -1637,9 +1664,9 @@ class UserAPIController extends BaseController
         
 
         $offers = $this->userRepository->offersList(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR,
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR,
             Carbon::now()->format('m-d-Y'));
         
             $offersArray = collect([]);
@@ -1652,6 +1679,7 @@ class UserAPIController extends BaseController
                     'RECRUITMENT_YEAR' => $offer->RECRUITMENT_YEAR,
                     'RECRUITMENT_NUMBER' => $offer->RECRUITMENT_NUMBER,
                     'RECRUITMENT_GROUP' => $offer->RECRUITMENT_GROUP,
+                    'OFFER_JOB_GROUP' => $this->convertUTF8($offer->OFFER_JOB_GROUP),
                     'OFFER_JOB' => $this->convertUTF8($offer->OFFER_JOB),
                     'OFFER_AD_TITLE' => $this->convertUTF8($offer->OFFER_AD_TITLE),
                     'OFFER_AD_TEXT_TASKS' => $this->convertUTF8($offer->OFFER_AD_TEXT_TASKS), // charset convert
@@ -1677,9 +1705,9 @@ class UserAPIController extends BaseController
         if(Auth::user()){
 
             $medicine = $this->userRepository->getMedicine(
-                Auth::user()[0]->NIF_UTILIZADOR, 
-                Auth::user()[0]->PASS_UTILIZADOR, 
-                Auth::user()[0]->EMAIL_UTILIZADOR);
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR);
         }
 
         return json_encode($medicine);
@@ -1690,9 +1718,9 @@ class UserAPIController extends BaseController
         if(Auth::user()){
 
             $contracts = $this->userRepository->getContracts(
-                Auth::user()[0]->NIF_UTILIZADOR, 
-                Auth::user()[0]->PASS_UTILIZADOR, 
-                Auth::user()[0]->EMAIL_UTILIZADOR
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR
             );
         }
 
@@ -1704,9 +1732,9 @@ class UserAPIController extends BaseController
         if(Auth::user()){
 
             $recruitments = $this->userRepository->getRecruitments(
-                Auth::user()[0]->NIF_UTILIZADOR, 
-                Auth::user()[0]->PASS_UTILIZADOR, 
-                Auth::user()[0]->EMAIL_UTILIZADOR, 
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR, 
             $request->DATE_FROM, $request->DATE_TO);
         }
 
@@ -1736,9 +1764,9 @@ class UserAPIController extends BaseController
         if(Auth::user()){
 
             $irsIncomes = $this->userRepository->getIRS(
-                Auth::user()[0]->NIF_UTILIZADOR, 
-                Auth::user()[0]->PASS_UTILIZADOR, 
-                Auth::user()[0]->EMAIL_UTILIZADOR);
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR);
         }
 
         // $collection = collect($irsIncome);
@@ -1827,9 +1855,9 @@ class UserAPIController extends BaseController
         // return json_encode($request->input());
 
         $attachmentNew = $this->userRepository->attachmentNew(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR,
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR,
             $USER_ATTACHMENT_NAME, 
             $request->USER_ATTACHMENT_CLASS_ID, 
             $FILE);
@@ -1841,9 +1869,9 @@ class UserAPIController extends BaseController
     public function attachmentDestroy(Request $request) {
 
         $attachmentDestroy = $this->userRepository->attachmentDestroy(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR,
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR,
             $request->USER_ATTACHMENT_NAME );
 
         return json_encode($attachmentDestroy);
@@ -1882,9 +1910,9 @@ class UserAPIController extends BaseController
         if (Auth::user()){
 
             $attachments = $this->userRepository->attachmentsList(
-            Auth::user()[0]->NIF_UTILIZADOR, 
-            Auth::user()[0]->PASS_UTILIZADOR, 
-            Auth::user()[0]->EMAIL_UTILIZADOR, 
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR, 
             );
         }
 

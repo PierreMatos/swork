@@ -9,12 +9,34 @@ class OfferRepository
 {
 
     // Este é o procedimento para lista as ofertas:
-    public function offersList($date) 
+    public function offersList($date, $offerJob, $recruitmentGroup, $offerJobId) 
     {
         $offers="";
+        $whereClause="";
+        // $offerJobId  = "";
 
+        // dd($offerJobId);
+        if ($offerJobId != NULL && $recruitmentGroup == NULL ){
 
-        $offers = DB::select("SELECT * FROM API_OFFERS_LIST(NULL)");
+            $whereClause = "WHERE OFFER_JOB_ID =" . "'".$offerJobId."'";
+            
+        }
+       
+        if ($recruitmentGroup != NULL && $offerJobId == NULL){
+            
+            $whereClause = "WHERE RECRUITMENT_GROUP = " .  "'".$recruitmentGroup."'";
+            
+        }
+       
+        if ($recruitmentGroup != NULL && $offerJobId != NULL){
+            
+            $whereClause = "WHERE OFFER_JOB_ID =" . "'".$offerJobId."'". " and RECRUITMENT_GROUP =" . "'".$recruitmentGroup."'";
+            
+        }
+       
+
+        $offers = DB::select("SELECT * FROM API_OFFERS_LIST(NULL) $whereClause ");
+
 
         DB::commit();
 

@@ -18,3 +18,11 @@ Route::get('/', function () {
 });
 
 Route::get('get', [App\Http\Controllers\Controller::class, 'get'])->name('get');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
