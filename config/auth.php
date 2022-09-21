@@ -89,7 +89,7 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => 'password_resets',
+            'table' => 'PASSWORD_RESETS',
             'expire' => 60,
             'throttle' => 60,
         ],
