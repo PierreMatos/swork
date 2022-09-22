@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Auth\CanResetPassword;
-
+use App\Notifications\ResetPassword;
 
 
 class User extends Authenticatable implements JWTSubject, CanResetPassword
@@ -190,9 +190,19 @@ class User extends Authenticatable implements JWTSubject, CanResetPassword
     }
 
     public function getEmailForPasswordReset()
-{
+    {
 
-    return $this->EMAIL;
-}
-    
+        return $this->EMAIL;
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
+    }
+
+    public function getRememberTokenName()
+    {
+        return 'REMEMBER_TOKEN';
+    }
+
 }
