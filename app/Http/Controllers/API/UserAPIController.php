@@ -15,8 +15,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
-
-
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Auth\ConfirmAccountMail;
 
 class UserAPIController extends BaseController
 {
@@ -295,10 +295,9 @@ class UserAPIController extends BaseController
                 
                 }
 
+                Mail::to($EMAIL)->send(new \App\Mail\ConfirmAccountMail($EMAIL, $USER_NAME));
+
             }
-
-
-           
 
         // $token = JWTAuth::fromUser($newUser);
 
@@ -311,6 +310,42 @@ class UserAPIController extends BaseController
         return json_encode($resultsArray);
     }
 
+
+    public function sendEmailConfirmation($user){
+        
+        $user = $request->input();
+        $name = $request->name;
+        $email = $request->email;
+        $token = $request->token;
+
+        Mail::to($email)->send(new \App\Mail\ConfirmAccountMail($email, $name, $token));
+
+        return 'success';
+
+    }
+
+    public function confirmAccount(Request $request){
+
+        // dd($request->email);
+        // $account = User::find($request->email);
+
+        $account = User::where('EMAIL_UTILIZADOR', $request->email)->first();
+
+        if ($account){
+
+            $account->VALIDADO = 'S';
+            $account->save();
+
+            return redirect('https://myswork.herokuapp.com/login');
+
+            return $account;
+
+        }else{
+
+            return 'User not found';
+        }
+
+    }
 
     public function loginverify(Request $request){
 

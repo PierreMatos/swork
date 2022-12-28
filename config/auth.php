@@ -91,7 +91,11 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
+<<<<<<< Updated upstream
             'throttle' => 60,
+=======
+            'throttle' => 5,
+>>>>>>> Stashed changes
         ],
     ],
 
