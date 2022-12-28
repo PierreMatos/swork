@@ -1,7 +1,7 @@
 --
 deployment:
  tasks:
- - export DEPLOYPATH=/home/swork/api.swork.pt/
+ - export DEPLOYPATH=/home/swork/test/
  - /bin/cp * $DEPLOYPATH
 
 
