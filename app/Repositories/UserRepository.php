@@ -187,6 +187,8 @@ class UserRepository
 
         DB::commit();
         
+        DD('OI');
+        
         return $user;
 
     }
