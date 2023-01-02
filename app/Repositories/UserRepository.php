@@ -183,8 +183,8 @@ class UserRepository
 
         $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$JOB_EXPERIENCE_ID')"); 
 
-        dd($user);
-        
+        dd("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE(" $USER_NIF . $USER_PASS . $USER_EMAIL . $JOB_EXPERIENCE_ID);
+
         DB::commit();
         
         return $user;
