@@ -2,6 +2,6 @@
 deployment:
  tasks:
  - export DEPLOYPATH=/home/swork/test/
- - /bin/cp -R * $DEPLOYPATH
+ - /bin/cp -R app $DEPLOYPATH
 
 
