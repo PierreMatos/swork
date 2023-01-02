@@ -181,6 +181,8 @@ class UserRepository
     public function deleteJobExperience($USER_NIF, $USER_PASS, $USER_EMAIL, $JOB_EXPERIENCE_ID) 
     {
 
+        DB::beginTransaction();
+
         $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$JOB_EXPERIENCE_ID')"); 
 
         DB::commit();
@@ -500,7 +502,7 @@ class UserRepository
     {
 
 
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
         $abilities = DB::select("SELECT * FROM API_USER_LANGUAGES_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
        
