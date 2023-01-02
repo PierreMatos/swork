@@ -18,8 +18,6 @@ Route::get('/', function () {
 });
 
 Route::get('get', [App\Http\Controllers\Controller::class, 'get'])->name('get');
-<<<<<<< Updated upstream
-=======
 
 Auth::routes();
 
@@ -49,4 +47,3 @@ Route::get('/mailable3', function () {
     $token="45ds6a4d56sad4as564df6";
     return new App\Mail\ConfirmAccountMail($email, $name, $token);
 });
->>>>>>> Stashed changes

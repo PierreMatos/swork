@@ -2,6 +2,19 @@
 
 return [
 
+    	/*
+    |--------------------------------------------------------------------------
+    | Authentication Table
+    |--------------------------------------------------------------------------
+    |
+    | When using the "Database" authentication driver, we need to know which
+    | table should be used to retrieve your users. We have chosen a basic
+    | default value but you may easily change it to any table you like.
+    |
+    */
+
+    'table' => 'EMPREGADOS_UTILIZADORES_PORTAL',
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -18,6 +31,8 @@ return [
         'passwords' => 'users',
     ],
 
+
+    
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -36,7 +51,20 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+            // 'hash' => false,
+
+        ],
+
+        'custom' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+            // 'hash' => false,
+          ],
+
+          'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
@@ -66,6 +94,17 @@ return [
         ],
 
         // 'users' => [
+        //     'driver' => 'default',
+        //     'model' => 'API_USERS_LIST',
+        // ],
+        'custom' => [
+            'driver' => 'eloquent',
+            'table' => 'EMPREGADOS_UTILIZADORES_PORTAL',
+            'model' => App\Models\User::class,
+
+        ],
+
+        // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
@@ -89,13 +128,9 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => 'password_resets',
+            'table' => 'PASSWORD_RESETS',
             'expire' => 60,
-<<<<<<< Updated upstream
-            'throttle' => 60,
-=======
             'throttle' => 5,
->>>>>>> Stashed changes
         ],
     ],
 

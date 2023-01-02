@@ -7,10 +7,31 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Repositories\UserRepository;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use App\Notifications\ResetPassword;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements JWTSubject, CanResetPassword
 {
+
+    private $userRepository;
+    public $timestamps = false;
+    public $incrementing = false;
+    protected $primaryKey = 'NIF_UTILIZADOR';
+
+
     use HasApiTokens, HasFactory, Notifiable;
+
+     /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    // protected $table = 'API_USER_LIST';
+    protected $table = 'EMPREGADOS_UTILIZADORES_PORTAL';
+    
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +39,33 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'USER_NAME',
+        'USER_EMAIL',
+        'USER_PASSWORD',
+        'USER_NAME',
+        'NIF_UTILIZADOR',
+        'PASS_UTILIZADOR',
+        'EMAIL_UTILIZADOR',
+        'VALIDADO',
+        'USER_COMMUNICATION_TYPE',
+        'USER_BIRTHDATE',
+        'USER_COUNTRY_ID',
+        'USER_QUALIFICATION_ID',
+        'USER_POSTAL_CODE',
+        'USER_SOCIAL_SECURITY_NUMBER',
+        'USER_SEX',
+        'USER_TELEPHONE',
+        'USER_DISTRICT_ID',
+        'USER_COUNTY_ID',
+        'USER_HAS_CAR',
+        'USER_HAS_DRIVERS_LICENCE',
+        'USER_COMMUNICATION_TYPE',
+        'USER_NEWSLETTER',
+        'USER_PRIVACY_POLICY',
+        'USER_ADDRESS_1',
+        'USER_ADDRESS2',
+        'EMAIL'
+        // 'ID'
     ];
 
     /**
@@ -29,7 +74,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 
@@ -40,9 +84,36 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'USER_NAME' => 'string',
+        'USER_EMAIL'=> 'string',
+        'USER_NAME' => 'string',
+        'USER_PASSWORD'=> 'string',
+        'NIF_UTILIZADOR' => 'string',
+        'PASS_UTILIZADOR' => 'string',
+        'EMAIL_UTILIZADOR' => 'string',
+        'VALIDADO' => 'string',
+        'USER_BIRTHDATE' => 'string',
+        'USER_COUNTRY_ID' => 'integer',
+        'USER_QUALIFICATION_ID' => 'integer',
+        'USER_POSTAL_CODE' => 'string',
+        'USER_SOCIAL_SECURITY_NUMBER' => 'integer',
+        'USER_SEX' => 'string',
+        'USER_TELEPHONE' => 'integer',
+        'USER_DISTRICT_ID' => 'integer',
+        'USER_COUNTY_ID' => 'integer',
+        'USER_HAS_CAR' => 'integer',
+        'USER_HAS_DRIVERS_LICENCE' => 'integer',
+        'USER_COMMUNICATION_TYPE' => 'integer',
+        'USER_NEWSLETTER' => 'boolean',
+        'USER_PRIVACY_POLICY' => 'boolean',
+        'USER_ADDRESS_1' => 'string',
+        'USER_ADDRESS_2' => 'string',
+        'EMAIL' => 'string'
+
+
+        // 'ID' => 'integer',
+
     ];
-<<<<<<< Updated upstream
-=======
 
      // Rest omitted for brevity
 
@@ -133,5 +204,4 @@ class User extends Authenticatable
     {
         return 'REMEMBER_TOKEN';
     }
->>>>>>> Stashed changes
 }
