@@ -674,7 +674,7 @@ class UserAPIController extends BaseController
             Auth::user()->NIF_UTILIZADOR, 
             Auth::user()->PASS_UTILIZADOR, 
             Auth::user()->EMAIL_UTILIZADOR, 
-            $request->JOB_EXPERIENCE_ID);
+            $request->USER_EXPERIENCE_ID);
 
         }
        
