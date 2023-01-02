@@ -17,4 +17,4 @@ jobs:
         server: ftp.swork.pt
         username: remote@swork.pt
         password: i-48!z3BTk#O
-        server-dir: /home/swork/test/
+        server-dir: api.swork.pt
