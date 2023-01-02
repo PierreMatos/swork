@@ -1529,7 +1529,7 @@ class UserAPIController extends BaseController
     }
     
     public function destroyAbilities (Request $request){
-        DD('HEY');
+
         if (Auth::user()){
 
             $deleteAbilities = $this->userRepository->deleteUserAbilities(
