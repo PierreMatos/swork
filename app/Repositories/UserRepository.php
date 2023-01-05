@@ -180,7 +180,7 @@ class UserRepository
     public function deleteJobExperience($USER_NIF, $USER_PASS, $USER_EMAIL, $USER_EXPERIENCE_ID) 
     {
 
-        $user = DB::executeProcedure('API_USER_JOB_EXPERIENCE_DELETE', [$USER_NIF, $USER_PASS, $USER_EMAIL, $USER_EXPERIENCE_ID]);
+        // $user = DB::executeProcedure('API_USER_JOB_EXPERIENCE_DELETE', [$USER_NIF, $USER_PASS, $USER_EMAIL, $USER_EXPERIENCE_ID]);
 
         // $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$USER_EXPERIENCE_ID')"); 
 
@@ -188,7 +188,17 @@ class UserRepository
         // $stmt = DB::prepare("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$USER_EXPERIENCE_ID')");
         // $stmt->execute();
         // $dados = $stmt->fetchAll(PDO::FETCH_OBJ);
-        DB::commit();
+        $host = "firebird:dbname=62.28.229.114:d:\one-key\swworking.gdb";
+        $user = "SYSDBA";
+        $pass = "60087.hs";
+
+        $lokos = new PDO($host,$user,$pass);
+        $stmt = $lokos->prepare("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$USER_EXPERIENCE_ID')");
+        $stmt->execute();
+        $dados = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $lokos->commit();
+
+        // DB::commit();
         // print_r($dados);
 
         // dd ("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE(". $USER_NIF . ' , ' . $USER_PASS . ' , ' . $USER_EMAIL . ' , ' . $USER_EXPERIENCE_ID);
