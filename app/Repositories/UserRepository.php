@@ -491,7 +491,7 @@ class UserRepository
             // $abilities = DB::select("SELECT * FROM API_USER_LANGUAGES_NEW($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$ABILITY_ID')");
 
             
-            DB::commit();
+            dd(DB::commit());
 
 
         return $abilities;
