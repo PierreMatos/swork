@@ -4,13 +4,12 @@ namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use Illuminate\Database\PDO\Connection;
 
 $host = "firebird:dbname=62.28.229.114:d:\one-key\swworking.gdb";
 $user = "SYSDBA";
 $pass = "60087.hs";
 
-$lokos = new PDO($host,$user,$pass);
+$lokos = new ..\..\PDO($host,$user,$pass);
 
 class UserRepository
 {
