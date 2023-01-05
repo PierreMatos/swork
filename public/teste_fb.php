@@ -1,5 +1,7 @@
 <?php
-echo env('APP_URL');
+
+echo 'My username is ' .$_ENV["APP_NAME"] . '!';
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
