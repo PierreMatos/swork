@@ -1,6 +1,6 @@
 <?php
 
-echo 'My username is ' .$_ENV["APP_NAME"] . '!';
+echo 'My username is ' .$_ENV['APP_NAME'] . '!';
 
 
 ini_set('display_errors', 1);
