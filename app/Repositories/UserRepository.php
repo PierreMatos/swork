@@ -137,7 +137,6 @@ class UserRepository
             $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_NEW($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$COMPANY', '$JOB', '$START_DATE', null)");
         }
         
-        // dd("yo2");
         // DB::commit();
 
         return $user;
@@ -151,7 +150,7 @@ class UserRepository
 
         $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_GET($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
 
-        dd(DB::commit());
+        DB::commit();
 
         return $user;
 
@@ -188,7 +187,7 @@ class UserRepository
         // dd ("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE(". $USER_NIF . ' , ' . $USER_PASS . ' , ' . $USER_EMAIL . ' , ' . $USER_EXPERIENCE_ID);
 
 
-       dd(DB::commit());
+        // DB::commit();
 
         return $user;
 
