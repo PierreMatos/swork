@@ -1,6 +1,6 @@
 <?php
 
-echo 'My username is ' .$_ENV['APP_NAME'] . env('APP_URL').  '!';
+echo 'My username is ' .$_ENV['APP_NAME'] . config('database.firebird').  '!';
 
 
 ini_set('display_errors', 1);
