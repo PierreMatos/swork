@@ -182,14 +182,21 @@ class UserRepository
 
         // $user = DB::executeProcedure('API_USER_JOB_EXPERIENCE_DELETE', [$USER_NIF, $USER_PASS, $USER_EMAIL, $USER_EXPERIENCE_ID]);
 
-        $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$USER_EXPERIENCE_ID')"); 
+        // $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$USER_EXPERIENCE_ID')"); 
+
+        // $lokos = new PDO($host,$user,$pass);
+        $stmt = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$USER_EXPERIENCE_ID')");
+        $stmt->execute();
+        $dados = $stmt->fetchAll(PDO::FETCH_OBJ);
+        DB::commit();
+        // print_r($dados);
 
         // dd ("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE(". $USER_NIF . ' , ' . $USER_PASS . ' , ' . $USER_EMAIL . ' , ' . $USER_EXPERIENCE_ID);
 
 
         // DB::commit();
 
-        return $user;
+        return $dados;
 
     }
     
