@@ -710,7 +710,7 @@ class UserRepository
     public function attachmentNew($USER_NIF, $USER_PASS, $USER_EMAIL, $USER_ATTACHMENT_NAME, $USER_ATTACHMENT_CLASS_ID, $USER_ATTACHMENT)
     {
 
-        // dd($USER_ATTACHMENT);
+        dd('hey');
         // $blob = fopen($USER_ATTACHMENT->path(), 'rb');
 
         // $connection =  ibase_connect('d:/one-key/swworking.gdb', 'APISW', 'SWAPI.001', 'ISO8859_1', '100');
