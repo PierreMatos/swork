@@ -1903,7 +1903,8 @@ class UserAPIController extends BaseController
             $request->USER_ATTACHMENT_CLASS_ID, 
             $FILE);
 
-        return json_encode($attachmentNew);
+            
+        return json_encode($this->convertUTF8($attachmentNew));
 
     }
 
