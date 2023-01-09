@@ -668,7 +668,8 @@ class UserAPIController extends BaseController
 
     public function destroyJobExperience (Request $request){
         
-        if (Auth::user()){
+        //validaçao de id 
+        if (Auth::user() && $request->USER_EXPERIENCE_ID){
 
         $user = $this->userRepository->deleteJobExperience( 
             Auth::user()->NIF_UTILIZADOR, 
@@ -676,9 +677,10 @@ class UserAPIController extends BaseController
             Auth::user()->EMAIL_UTILIZADOR, 
             $request->USER_EXPERIENCE_ID);
 
+            return json_encode($user);
         }
-       
-        return json_encode($user);
+        
+        return json_encode("error");
     }
     
     
