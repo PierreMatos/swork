@@ -733,7 +733,7 @@ class UserRepository
        
         DB::commit();
 
-        return ($attachmentNew);
+        return $attachmentNew;
         // return $this->convertUTF8($attachmentNew);
 
     }
