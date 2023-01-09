@@ -1941,7 +1941,7 @@ class UserAPIController extends BaseController
             $request->USER_ATTACHMENT_CLASS_ID, 
             $FILE);
 
-            dd($attachmentNew);
+            // dd($attachmentNew);
         return json_encode($attachmentNew);
 
     }
