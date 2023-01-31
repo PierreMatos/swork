@@ -75,7 +75,12 @@ class OfferAPIController extends BaseController
 
         $offer = $this->offerRepository->offerShow($id);
 
-        dd($offer);
+        
+        if ($offer){
+            dd($offer);
+        }else{
+            dd('nao');
+        }
         // $input = $request->collect();
        $offersArray = collect([]);
 
