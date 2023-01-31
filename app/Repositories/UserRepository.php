@@ -784,7 +784,7 @@ class UserRepository
 
     }
 
-    public function messageNew($USER_NIF, $USER_PASS, $USER_EMAIL, $OFFER)
+    public function messageNew($USER_NIF, $USER_PASS, $USER_EMAIL, $MESSAGE_ID, $MESSAGE_SUBJECT, $MESSAGE_TEXT)
     {
 
         // DB::beginTransaction();
