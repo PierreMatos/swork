@@ -1833,7 +1833,11 @@ class UserAPIController extends BaseController
         $messages = $this->userRepository->messageNew(
             Auth::user()->NIF_UTILIZADOR, 
             Auth::user()->PASS_UTILIZADOR, 
-            Auth::user()->EMAIL_UTILIZADOR);
+            Auth::user()->EMAIL_UTILIZADOR,
+            $request->MESSAGE_ID,
+            $request->MESSAGE_SUBJECT,
+            $request->MESSAGE_TEXT,
+        );
 
         return json_encode($messages);
 
