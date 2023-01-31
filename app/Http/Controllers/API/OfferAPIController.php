@@ -52,6 +52,7 @@ class OfferAPIController extends BaseController
                 'OFFER_AD_TEXT_TASKS' => $this->convertUTF8($offer->OFFER_AD_TEXT_TASKS), // charset convert
                 'OFFER_AD_TEXT_PROFILE' => $this->convertUTF8($offer->OFFER_AD_TEXT_PROFILE), // charset convert
                 'OFFER_AD_TEXT_INFO' => $this->convertUTF8($offer->OFFER_AD_TEXT_INFO), // charset convert
+                'OFFER_AD_TEXT_INFO_2' => $this->convertUTF8($offer->OFFER_AD_TEXT_INFO_2), // charset convert
                 'OFFER_AD_TEXT_BENEFITS' => $this->convertUTF8($offer->OFFER_AD_TEXT_BENEFITS), // charset convert
                 'OFFER_AD_DISTRITO' => $this->convertUTF8($offer->OFFER_AD_DISTRITO), // charset convert
                 'OFFER_AD_CONCELHO' => $this->convertUTF8($offer->OFFER_AD_CONCELHO), // charset convert
@@ -98,6 +99,7 @@ class OfferAPIController extends BaseController
                 'OFFER_AD_TEXT_TASKS' => $this->convertUTF8($offer->OFFER_AD_TEXT_TASKS), // charset convert
                 'OFFER_AD_TEXT_PROFILE' => $this->convertUTF8($offer->OFFER_AD_TEXT_PROFILE), // charset convert
                 'OFFER_AD_TEXT_INFO' => $this->convertUTF8($offer->OFFER_AD_TEXT_INFO), // charset convert
+                'OFFER_AD_TEXT_INFO_2' => $this->convertUTF8($offer->OFFER_AD_TEXT_INFO_2), // charset convert
                 'OFFER_AD_TEXT_BENEFITS' => $this->convertUTF8($offer->OFFER_AD_TEXT_BENEFITS), // charset convert
                 'OFFER_AD_DISTRITO' => $this->convertUTF8($offer->OFFER_AD_DISTRITO), // charset convert
                 'OFFER_AD_CONCELHO' => $this->convertUTF8($offer->OFFER_AD_CONCELHO), // charset convert
