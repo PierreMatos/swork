@@ -77,13 +77,6 @@ class OfferAPIController extends BaseController
 
         
         if (!empty($offer)){
-            dd($offer);
-        }else{
-            dd('nao');
-        }
-        // $input = $request->collect();
-       $offersArray = collect([]);
-
 
             $allOffer = collect( [
                 'OFFER_ID' => $offer->OFFER_ID,
@@ -110,8 +103,11 @@ class OfferAPIController extends BaseController
                 'OFFER_AD_FREGUESIA' => $this->convertUTF8($offer->OFFER_AD_FREGUESIA), // charset convert
             ]);
 
+        }else{
+            return json_encode('Oferta não encontrada');
+        }
+
         return ($allOffer);
-        
 
     }
     
