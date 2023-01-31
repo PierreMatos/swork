@@ -54,7 +54,7 @@ class OfferRepository
 
         DB::commit();
 
-        return( $offers[0]);
+        return($offers);
         // dd($offers);
 
     }
