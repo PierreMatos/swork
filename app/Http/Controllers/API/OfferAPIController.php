@@ -73,11 +73,12 @@ class OfferAPIController extends BaseController
     {
 
 
-        $offer = $this->offerRepository->offerShow($id)[0];
+        $offer = $this->offerRepository->offerShow($id);
 
         
         if (!empty($offer)){
 
+            $offer = $offer[0];
             $allOffer = collect( [
                 'OFFER_ID' => $offer->OFFER_ID,
                 'RECRUITMENT_REFERENCE' => $offer->RECRUITMENT_REFERENCE,
