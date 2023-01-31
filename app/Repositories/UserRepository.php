@@ -797,7 +797,7 @@ class UserRepository
 
     }
 
-    public function messageGet($USER_NIF, $USER_PASS, $USER_EMAIL, $OFFER)
+    public function messageGet($USER_NIF, $USER_PASS, $USER_EMAIL)
     {
 
         // DB::beginTransaction();
