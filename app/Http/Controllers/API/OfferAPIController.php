@@ -78,7 +78,7 @@ class OfferAPIController extends BaseController
         
         if (!empty($offer)){
 
-            dd('ent?');
+            dd($offer);
             $allOffer = collect( [
                 'OFFER_ID' => $offer->OFFER_ID,
                 'RECRUITMENT_REFERENCE' => $offer->RECRUITMENT_REFERENCE,
