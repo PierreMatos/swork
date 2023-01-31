@@ -597,7 +597,7 @@ class UserRepository
     public function getPayrollPDF($USER_NIF, $USER_PASS, $USER_EMAIL, $PAYROLL_YEAR, $PAYROLL_NUMBER)
     {
 
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
         $payrollPDF = DB::select("SELECT * FROM API_USER_PAYROLL_PDF_GET ('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$PAYROLL_YEAR', '$PAYROLL_NUMBER')");
        
