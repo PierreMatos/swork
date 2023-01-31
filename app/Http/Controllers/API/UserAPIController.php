@@ -1816,6 +1816,30 @@ class UserAPIController extends BaseController
         return json_encode($incomeArray);
     }
 
+    public function getMessages(Request $request) {
+
+        $messages = $this->userRepository->messageGet(
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR);
+
+        return json_encode($messages);
+
+
+    }
+
+    public function postMessages(Request $request) {
+
+        $messages = $this->userRepository->messageNew(
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR);
+
+        return json_encode($messages);
+
+
+    }
+
     public function getIRS (Request $request){
         
         if(Auth::user()){

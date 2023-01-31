@@ -784,6 +784,32 @@ class UserRepository
 
     }
 
+    public function messageNew($USER_NIF, $USER_PASS, $USER_EMAIL, $OFFER)
+    {
+
+        // DB::beginTransaction();
+
+        $message = DB::select("SELECT * FROM API_USER_MESSAGE_NEW ('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$MESSAGE_ID', '$MESSAGE_SUBJECT', '$MESSAGE_TEXT')");
+       
+        DB::commit();
+
+        return $message;
+
+    }
+
+    public function messageGet($USER_NIF, $USER_PASS, $USER_EMAIL, $OFFER)
+    {
+
+        // DB::beginTransaction();
+
+        $message = DB::select("SELECT * FROM API_USER_MESSAGE_GET ('$USER_NIF', '$USER_PASS', '$USER_EMAIL')");
+       
+        DB::commit();
+
+        return $message;
+
+    }
+
     public function convertUTF8($data) {
 
         if(!empty($data)) {
