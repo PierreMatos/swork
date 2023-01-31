@@ -1745,13 +1745,29 @@ class UserAPIController extends BaseController
 
         if(Auth::user()){
 
-            $medicine = $this->userRepository->getMedicine(
+            $medicines = $this->userRepository->getMedicine(
                 Auth::user()->NIF_UTILIZADOR, 
                 Auth::user()->PASS_UTILIZADOR, 
                 Auth::user()->EMAIL_UTILIZADOR);
         }
 
-        return json_encode($medicine);
+        $medicineArray = collect([]);
+
+        foreach ($medicines as $medicine){
+
+            $all = collect( [
+                'MEDICINE_ID' => ($medicine->MEDICINE_ID),
+                'MEDICINE_DATE' => ($medicine->MEDICINE_DATE),
+                'MEDICINE_TYPE' => $this->convertUTF8($medicine->MEDICINE_TYPE),
+                'MEDICINE_RESULT' => $this->convertUTF8($medicine->MEDICINE_RESULT),
+                
+            ]);
+
+            $medicineArray->push($all);
+            
+        }
+
+        return json_encode($medicineArray);
     }
 
     public function getContracts (Request $request){

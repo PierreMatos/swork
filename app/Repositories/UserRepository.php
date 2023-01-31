@@ -616,8 +616,6 @@ class UserRepository
        
         DB::commit();
 
-        dd($medicine);
-        
         return $medicine;
 
     }
