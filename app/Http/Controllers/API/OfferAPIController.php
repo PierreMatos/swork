@@ -76,7 +76,7 @@ class OfferAPIController extends BaseController
         $offer = $this->offerRepository->offerShow($id);
 
         
-        if ($offer){
+        if (!empty($offer)){
             dd($offer);
         }else{
             dd('nao');
