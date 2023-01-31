@@ -802,7 +802,7 @@ class UserRepository
 
         // DB::beginTransaction();
 
-        $message = DB::select("SELECT * FROM API_USER_MESSAGE_GET ('$USER_NIF', '$USER_PASS', '$USER_EMAIL')");
+        $message = DB::select("SELECT * FROM API_USER_MESSAGES_GET ('$USER_NIF', '$USER_PASS', '$USER_EMAIL')");
        
         DB::commit();
 
