@@ -777,7 +777,7 @@ class UserRepository
         // DB::beginTransaction();
 
         $offers = DB::select("SELECT * FROM API_USER_OFFER_APPLY ('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$OFFER')");
-        dd($offers);
+        dd("SELECT * FROM API_USER_OFFER_APPLY ('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$OFFER')");
         DB::commit();
 
         return $offers;
