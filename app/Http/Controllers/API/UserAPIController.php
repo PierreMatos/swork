@@ -1290,8 +1290,6 @@ class UserAPIController extends BaseController
 
         foreach ($countries as $country){
 
-            dd($country->NACIONALIDADE);
-
             $all = collect( [
                 'CODIGO_PAIS' => $country->CODIGO_PAIS,
                 'NACIONALIDADE' => $this->convertUTF8($country->NACIONALIDADE),
