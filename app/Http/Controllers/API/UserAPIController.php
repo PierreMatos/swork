@@ -1690,6 +1690,7 @@ class UserAPIController extends BaseController
 
     public function offerApply (Request $request){
     
+        //TODO verify Recrutiment Reference ID
         $offers = $this->userRepository->offerApply(
             Auth::user()->NIF_UTILIZADOR, 
             Auth::user()->PASS_UTILIZADOR, 
@@ -1834,7 +1835,6 @@ class UserAPIController extends BaseController
             Auth::user()->NIF_UTILIZADOR, 
             Auth::user()->PASS_UTILIZADOR, 
             Auth::user()->EMAIL_UTILIZADOR,
-            $request->MESSAGE_ID,
             $request->MESSAGE_SUBJECT,
             $request->MESSAGE_TEXT,
         );
