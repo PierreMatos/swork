@@ -784,12 +784,12 @@ class UserRepository
 
     }
 
-    public function messageNew($USER_NIF, $USER_PASS, $USER_EMAIL, $MESSAGE_ID, $MESSAGE_SUBJECT, $MESSAGE_TEXT)
+    public function messageNew($USER_NIF, $USER_PASS, $USER_EMAIL, $MESSAGE_SUBJECT, $MESSAGE_TEXT)
     {
 
         // DB::beginTransaction();
 
-        $message = DB::select("SELECT * FROM API_USER_MESSAGES_NEW ('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$MESSAGE_ID', '$MESSAGE_SUBJECT', '$MESSAGE_TEXT')");
+        $message = DB::select("SELECT * FROM API_USER_MESSAGES_NEW ('$USER_NIF', '$USER_PASS', '$USER_EMAIL', '$MESSAGE_SUBJECT', '$MESSAGE_TEXT')");
        
         DB::commit();
 
