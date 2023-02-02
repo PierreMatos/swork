@@ -1288,9 +1288,9 @@ class UserAPIController extends BaseController
         $countriesArray = collect([]);
                  
 
-        dd($countries);
-        
         foreach ($countries as $country){
+
+            dd($country->NACIONALIDADE);
 
             $all = collect( [
                 'CODIGO_PAIS' => $country->CODIGO_PAIS,
