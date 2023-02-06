@@ -412,7 +412,7 @@ class UserRepository
         
         DB::beginTransaction();
 
-        $counties = DB::select("SELECT CODIGO_DISTRITO, CODIGO_CONCELHO, DESCRICAO_API FROM CONCELHOS $whereClause ");
+        $counties = DB::select("SELECT CODIGO_DISTRITO, CODIGO_CONCELHO, DESCRICAO_API FROM CONCELHOS $whereClause ORDER BY DESCRICAO");
        
         DB::commit();
 
@@ -435,7 +435,7 @@ class UserRepository
         
         DB::beginTransaction();
 
-        $locations = DB::select("SELECT * FROM LOCAIS $whereClause ");
+        $locations = DB::select("SELECT * FROM LOCAIS $whereClause ORDER BY DESCRICAO");
        
         DB::commit();
 
