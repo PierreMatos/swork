@@ -1287,12 +1287,11 @@ class UserAPIController extends BaseController
 
         $countriesArray = collect([]);
                  
-
         foreach ($countries as $country){
 
             $all = collect( [
                 'CODIGO_PAIS' => $country->CODIGO_PAIS,
-                'NACIONALIDADE' => $this->convertUTF8($country->NACIONALIDADE),
+                // 'NACIONALIDADE' => $this->convertUTF8($country->NACIONALIDADE),
             ]);
 
             $countriesArray->push($all);
@@ -1367,7 +1366,7 @@ class UserAPIController extends BaseController
                 'CODIGO_DISTRITO' => ($location->CODIGO_DISTRITO),
                 'CODIGO_CONCELHO' => ($location->CODIGO_CONCELHO),
                 'CODIGO_FREGUESIA' => ($location->CODIGO_FREGUESIA),
-                'DESCRICAO' =>  $this->convertUTF8($location->DESCRICAO),
+                // 'DESCRICAO' =>  $this->convertUTF8($location->DESCRICAO),
                 // 'NACIONALIDADE' => $this->convertUTF8($country->NACIONALIDADE),
                 
             ]);
