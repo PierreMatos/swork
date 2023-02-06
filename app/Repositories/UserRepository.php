@@ -439,7 +439,6 @@ class UserRepository
        
         DB::commit();
 
-        DD($locations);
         return $locations;
 
     }
