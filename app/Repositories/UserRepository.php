@@ -389,7 +389,7 @@ class UserRepository
 
         DB::beginTransaction();
 
-        $districts = DB::select("SELECT * FROM DISTRITOS ");
+        $districts = DB::select("SELECT * FROM DISTRITOS ORDER BY DESCRICAO");
        
         DB::commit();
 
