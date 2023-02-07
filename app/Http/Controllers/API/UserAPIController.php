@@ -1293,7 +1293,7 @@ class UserAPIController extends BaseController
 
                     $all = collect( [
                         'CODIGO_PAIS' => $country->CODIGO_PAIS,
-                        'NACIONALIDADE_2' => $this->convertUTF8($country->NACIONALIDADE),
+                        'NACIONALIDADE' => $this->convertUTF8($country->NACIONALIDADE),
                         // 'NACIONALIDADE_2' => ($country->NACIONALIDADE),
                     ]);
         
