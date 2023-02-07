@@ -1289,8 +1289,8 @@ class UserAPIController extends BaseController
         $countriesArray = collect([]);
         foreach ($countries as $country){
 
-            dd($countries);
-                // if($country->CODIGO_PAIS == 9 ){
+            // dd($countries);
+                if($country->CODIGO_PAIS == 58 ){
 
                     $all = collect( [
                         'CODIGO_PAIS' => $country->CODIGO_PAIS,
@@ -1300,7 +1300,7 @@ class UserAPIController extends BaseController
         
                     $countriesArray->push($all);
                     // dd($countriesArray);
-                // }
+                }
             
         }
 
