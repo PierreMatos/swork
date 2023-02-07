@@ -1286,18 +1286,20 @@ class UserAPIController extends BaseController
         $countries = $this->userRepository->countriesList();
 
         return $countries;
-        
+
         $countriesArray = collect([]);
-                 dd($countries);
         foreach ($countries as $country){
 
-            $all = collect( [
-                'CODIGO_PAIS' => $country->CODIGO_PAIS,
-                'NACIONALIDADE_2' => $this->convertUTF8($country->NACIONALIDADE),
-                // 'NACIONALIDADE_2' => ($country->NACIONALIDADE),
-            ]);
+                if($country->CODIGO_PAIS == 9 ){
 
-            $countriesArray->push($all);
+                    $all = collect( [
+                        'CODIGO_PAIS' => $country->CODIGO_PAIS,
+                        'NACIONALIDADE_2' => $this->convertUTF8($country->NACIONALIDADE),
+                        // 'NACIONALIDADE_2' => ($country->NACIONALIDADE),
+                    ]);
+        
+                    $countriesArray->push($all);
+                }
             
         }
 
