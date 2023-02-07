@@ -1298,8 +1298,8 @@ class UserAPIController extends BaseController
                     ]);
         
                     $countriesArray->push($all);
+                    dd($countriesArray);
                 }
-                dd($countriesArray);
             
         }
 
