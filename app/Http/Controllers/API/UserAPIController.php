@@ -1296,7 +1296,7 @@ class UserAPIController extends BaseController
                         'CODIGO_PAIS' => $country->CODIGO_PAIS,
                         // 'NACIONALIDADE' => $this->convertUTF8($country->NACIONALIDADE),
                         'NACIONALIDADE' => ($country->NACIONALIDADE),
-                        
+
                     ]);
         
                     $countriesArray->push($all);
@@ -2039,12 +2039,12 @@ class UserAPIController extends BaseController
             if( $encodeType != 'UTF-8'){
             
                 $data = mb_convert_encoding($data ,'utf-8' , 'ISO-8859-1'); 
-                // $data = mb_convert_encoding($data, "UTF-8", "Windows-1252");
-
-            //   $data = mb_convert_encoding($data, "ISO-8859-1", "UTF-8" );
+                $newString = mb_convert_encoding($arr, "UTF-8", "auto");
+// return response()->json($newString);
             }
         }
-        return $data;   
+        return response()->json($newString);
+        // return $data;   
         
     }
         
