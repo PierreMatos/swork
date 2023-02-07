@@ -1286,7 +1286,7 @@ class UserAPIController extends BaseController
         $countries = $this->userRepository->countriesList();
 
         $countriesArray = collect([]);
-                //  dd($countries);
+                 dd($countries);
         foreach ($countries as $country){
 
             $all = collect( [
