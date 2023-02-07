@@ -377,6 +377,7 @@ class UserRepository
         $countries = DB::select("SELECT * from paises p ORDER BY IIF(UPPER(P.Descricao) = 'PORTUGAL', '', P.Nacionalidade)");
        
         DB::commit();
+        DD(DB::connection());
 
         return $countries;
 
