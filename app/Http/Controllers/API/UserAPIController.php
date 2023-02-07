@@ -2036,7 +2036,8 @@ class UserAPIController extends BaseController
         $encodeType = mb_detect_encoding($data , array('UTF-8','GBK','LATIN1','BIG5'));   
             if( $encodeType != 'UTF-8'){
             
-                $data = mb_convert_encoding($data ,'utf-8' , 'ISO-8859-1'); 
+                // $data = mb_convert_encoding($data ,'utf-8' , 'ISO-8859-1'); 
+                $data = mb_convert_encoding($data ,'utf-8' , 'WIN1252'); 
             //   $data = mb_convert_encoding($data, "ISO-8859-1", "UTF-8" );
             }
         }
