@@ -1290,7 +1290,7 @@ class UserAPIController extends BaseController
         foreach ($countries as $country){
 
             // dd($countries);
-                if($country->CODIGO_PAIS == 58 ){
+                if($country->CODIGO_PAIS == $request->CODIGO_PAIS ){
 
                     $all = collect( [
                         'CODIGO_PAIS' => $country->CODIGO_PAIS,
