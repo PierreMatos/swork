@@ -1373,7 +1373,7 @@ class UserAPIController extends BaseController
                 'CODIGO_DISTRITO' => ($location->CODIGO_DISTRITO),
                 'CODIGO_CONCELHO' => ($location->CODIGO_CONCELHO),
                 'CODIGO_FREGUESIA' => ($location->CODIGO_FREGUESIA),
-                'DESCRICAO' =>  $this->convertUTF8($location->DESCRICAO),
+                'DESCRICAO' =>  ($location->DESCRICAO),
                 
             ]);
 
