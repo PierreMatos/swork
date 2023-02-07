@@ -2039,8 +2039,7 @@ class UserAPIController extends BaseController
             if( $encodeType != 'UTF-8'){
             
                 $data = mb_convert_encoding($data ,'utf-8' , 'ISO-8859-1'); 
-                $newString = mb_convert_encoding($arr, "UTF-8", "auto");
-// return response()->json($newString);
+                $newString = mb_convert_encoding($data, "UTF-8", "auto");
             }
         }
         return response()->json($newString);
