@@ -581,6 +581,48 @@ class UserAPIController extends BaseController
         return json_encode($jobExperience);
     }
     
+    public function getQualification (Request $request){
+        
+        if (Auth::user()){
+            
+            $jobExperiences = $this->userRepository->getQualificatons(
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR);
+
+        }
+            
+        return json_encode($jobExperiences);
+    }
+    
+    public function updateQualification (Request $request){
+        
+        if (Auth::user()){
+            
+            $jobExperiences = $this->userRepository->updateQualificatons(
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR);
+
+        }
+            
+        return json_encode($jobExperiences);
+    }
+    
+    public function deleteQualification (Request $request){
+        
+        if (Auth::user()){
+            
+            $jobExperiences = $this->userRepository->deleteQualificatons(
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR);
+
+        }
+            
+        return json_encode($jobExperiences);
+    }
+
     public function getJobExperience (Request $request){
         
         if (Auth::user()){

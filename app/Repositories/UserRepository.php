@@ -142,13 +142,65 @@ class UserRepository
         return $user;
 
     }
-    
+
+    public function getQualificatons($USER_NIF, $USER_PASS, $USER_EMAIL) 
+    {
+
+        // DB::beginTransaction();
+
+        $user = DB::select("SELECT * FROM API_USER_JOB_QUALIFICATION_GET($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
+
+        DB::commit();
+
+        return $user;
+
+    }
+
+    public function updateQualificatons($USER_NIF, $USER_PASS, $USER_EMAIL) 
+    {
+
+        // DB::beginTransaction();
+
+        $user = DB::select("SELECT * FROM API_USER_QUALIFICATION_UPDATE($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
+
+        DB::commit();
+
+        return $user;
+
+    }
+
+    public function deleteQualificatons($USER_NIF, $USER_PASS, $USER_EMAIL) 
+    {
+
+        // DB::beginTransaction();
+
+        $user = DB::select("SELECT * FROM API_USER_QUALIFICATION_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
+
+        DB::commit();
+
+        return $user;
+
+    }
+
     public function getJobExperience($USER_NIF, $USER_PASS, $USER_EMAIL) 
     {
 
         // DB::beginTransaction();
 
         $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_GET($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
+
+        DB::commit();
+
+        return $user;
+
+    }
+
+    public function deleteJobExperience($USER_NIF, $USER_PASS, $USER_EMAIL) 
+    {
+
+        // DB::beginTransaction();
+
+        $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
 
         DB::commit();
 
@@ -374,7 +426,7 @@ class UserRepository
 
         
         // $countries = DB::select("SELECT * FROM PAISES ");
-        $countries = DB::select("SELECT * from paises p ORDER BY IIF(UPPER(P.Descricao) = 'PORTUGAL', '', P.Nacionalidade)");
+        $countries = DB::select("SELECT * from paises p ORDER BY IIF(UPPER(P.Nacionalidade) = 'PORTUGAL', '', P.Nacionalidade)");
        
         DB::commit();
 

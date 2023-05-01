@@ -98,6 +98,10 @@ Route::middleware('auth:api')->group(function(){
     Route::GET('workshiftsmonths', 'App\Http\Controllers\API\UserAPIController@workshiftmonths');
     Route::PATCH('updateworkshifts', 'App\Http\Controllers\API\UserAPIController@updateWorkShifts');
 
+    Route::GET('qualifications', 'App\Http\Controllers\API\UserAPIController@getQualifications');
+    Route::DELETE('qualifications', 'App\Http\Controllers\API\UserAPIController@deleteQualifications');
+    Route::PATCH('qualifications', 'App\Http\Controllers\API\UserAPIController@updateQualifications');
+
     Route::POST('job_experience', 'App\Http\Controllers\API\UserAPIController@postJobExperience');
     Route::GET('job_experience', 'App\Http\Controllers\API\UserAPIController@getJobExperience');
     Route::PATCH('job_experience', 'App\Http\Controllers\API\UserAPIController@updateJobExperience');
