@@ -195,18 +195,18 @@ class UserRepository
 
     }
 
-    public function deleteJobExperience($USER_NIF, $USER_PASS, $USER_EMAIL) 
-    {
+    // public function deleteJobExperience($USER_NIF, $USER_PASS, $USER_EMAIL) 
+    // {
 
-        // DB::beginTransaction();
+    //     // DB::beginTransaction();
 
-        $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
+    //     $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
 
-        DB::commit();
+    //     DB::commit();
 
-        return $user;
+    //     return $user;
 
-    }
+    // }
 
     public function updateJobExperience($USER_NIF, $USER_PASS, $USER_EMAIL, $JOB_EXPERIENCE_ID, $COMPANY, $JOB, $START_DATE, $END_DATE) 
     {
