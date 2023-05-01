@@ -581,7 +581,7 @@ class UserAPIController extends BaseController
         return json_encode($jobExperience);
     }
     
-    public function getQualification (Request $request){
+    public function getQualifications (Request $request){
         
         if (Auth::user()){
             
@@ -595,7 +595,7 @@ class UserAPIController extends BaseController
         return json_encode($jobExperiences);
     }
     
-    public function updateQualification (Request $request){
+    public function updateQualifications (Request $request){
         
         if (Auth::user()){
             
@@ -609,7 +609,7 @@ class UserAPIController extends BaseController
         return json_encode($jobExperiences);
     }
     
-    public function deleteQualification (Request $request){
+    public function deleteQualifications (Request $request){
         
         if (Auth::user()){
             
