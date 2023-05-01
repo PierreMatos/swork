@@ -148,7 +148,7 @@ class UserRepository
 
         // DB::beginTransaction();
 
-        $user = DB::select("SELECT * FROM API_USER_JOB_QUALIFICATION_GET($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
+        $user = DB::select("SELECT * FROM API_USER_QUALIFICATION_GET($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
 
         DB::commit();
 
