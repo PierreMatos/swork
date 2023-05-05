@@ -610,7 +610,22 @@ class UserAPIController extends BaseController
 
         }
 
-        return json_encode($qualifications);
+        $qualificationsArray = collect([]);
+
+        foreach ($qualifications as $qualification){
+
+            $all = collect([
+                'USER_QUALIFICATION_ID' => $this->convertUTF8($qualification->USER_QUALIFICATION_ID),
+                'USER_QUALIFICATION_SCHOOL' => $this->convertUTF8($qualification->USER_QUALIFICATION_SCHOOL),
+                'USER_QUALIFICATION_DESCRIPTION' => $this->convertUTF8($qualification->USER_QUALIFICATION_DESCRIPTION),
+                'USER_QUALIFICATION_DURATION' => $this->convertUTF8($qualification->USER_QUALIFICATION_DURATION),
+            ]);
+
+            $qualificationsArray->push($all);
+            
+        }
+
+        return json_encode($qualificationsArray);
     }
     
     public function updateQualifications (Request $request){
