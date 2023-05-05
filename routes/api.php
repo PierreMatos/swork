@@ -101,6 +101,7 @@ Route::middleware('auth:api')->group(function(){
     Route::GET('qualifications', 'App\Http\Controllers\API\UserAPIController@getQualifications');
     Route::DELETE('qualifications', 'App\Http\Controllers\API\UserAPIController@deleteQualifications');
     Route::PATCH('qualifications', 'App\Http\Controllers\API\UserAPIController@updateQualifications');
+    Route::POST('qualifications', 'App\Http\Controllers\API\UserAPIController@postQualifications');
 
     Route::POST('job_experience', 'App\Http\Controllers\API\UserAPIController@postJobExperience');
     Route::GET('job_experience', 'App\Http\Controllers\API\UserAPIController@getJobExperience');

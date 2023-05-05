@@ -143,6 +143,19 @@ class UserRepository
 
     }
 
+    public function addQualificatons($USER_NIF, $USER_PASS, $USER_EMAIL, $USER_QUALIFICATION_SCHOOL, $USER_QUALIFICATION_DESCRIPTION, $USER_QUALIFICATION_DURATION) 
+    {
+
+        // DB::beginTransaction();
+
+        $user = DB::select("SELECT * FROM API_USER_QUALIFICATION_GET($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$USER_QUALIFICATION_SCHOOL', '$USER_QUALIFICATION_DESCRIPTION', '$USER_QUALIFICATION_DURATION')");
+
+        DB::commit();
+
+        return $user;
+
+    }
+
     public function getQualificatons($USER_NIF, $USER_PASS, $USER_EMAIL) 
     {
 
@@ -155,6 +168,7 @@ class UserRepository
         return $user;
 
     }
+
 
     public function updateQualificatons($USER_NIF, $USER_PASS, $USER_EMAIL, $USER_QUALIFICATION_ID, $USER_QUALIFICATION_SCHOOL, $USER_QUALIFICATION_DESCRIPTION, $USER_QUALIFICATION_DURATION) 
     {

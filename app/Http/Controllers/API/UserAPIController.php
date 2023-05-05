@@ -581,6 +581,24 @@ class UserAPIController extends BaseController
         return json_encode($jobExperience);
     }
     
+        
+    public function postQualifications (Request $request){
+        
+        if (Auth::user()){
+            
+            $jobExperiences = $this->userRepository->updateQualificatons(
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR,
+                $request->USER_QUALIFICATION_SCHOOL, 
+                $request->USER_QUALIFICATION_DESCRIPTION, 
+                $request->USER_QUALIFICATION_DURATION, );
+
+        }
+            
+        return json_encode($jobExperiences);
+    }
+
     public function getQualifications (Request $request){
         
         if (Auth::user()){
