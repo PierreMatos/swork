@@ -156,12 +156,12 @@ class UserRepository
 
     }
 
-    public function updateQualificatons($USER_NIF, $USER_PASS, $USER_EMAIL) 
+    public function updateQualificatons($USER_NIF, $USER_PASS, $USER_EMAIL, $USER_QUALIFICATION_SCHOOL, $USER_QUALIFICATION_DESCRIPTION, $USER_QUALIFICATION_DURATION) 
     {
 
         // DB::beginTransaction();
 
-        $user = DB::select("SELECT * FROM API_USER_QUALIFICATION_UPDATE($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
+        $user = DB::select("SELECT * FROM API_USER_QUALIFICATION_UPDATE($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$USER_QUALIFICATION_SCHOOL', '$USER_QUALIFICATION_DESCRIPTION', '$USER_QUALIFICATION_DURATION' )");
 
         DB::commit();
 
