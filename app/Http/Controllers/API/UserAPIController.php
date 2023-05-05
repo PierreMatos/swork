@@ -586,7 +586,7 @@ class UserAPIController extends BaseController
         
         if (Auth::user()){
             
-            $jobExperiences = $this->userRepository->updateQualificatons(
+            $jobExperiences = $this->userRepository->addQualificatons(
                 Auth::user()->NIF_UTILIZADOR, 
                 Auth::user()->PASS_UTILIZADOR, 
                 Auth::user()->EMAIL_UTILIZADOR,
