@@ -609,7 +609,7 @@ class UserAPIController extends BaseController
                 Auth::user()->EMAIL_UTILIZADOR);
 
         }
-            
+            dd($jobExperiences);
         return json_encode($jobExperiences);
     }
     
