@@ -603,14 +603,14 @@ class UserAPIController extends BaseController
         
         if (Auth::user()){
             
-            $jobExperiences = $this->userRepository->getQualificatons(
+            $qualifications = $this->userRepository->getQualificatons(
                 Auth::user()->NIF_UTILIZADOR, 
                 Auth::user()->PASS_UTILIZADOR, 
                 Auth::user()->EMAIL_UTILIZADOR);
 
         }
-            dd($jobExperiences);
-        return json_encode($jobExperiences);
+
+        return json_encode($qualifications);
     }
     
     public function updateQualifications (Request $request){
