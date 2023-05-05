@@ -603,6 +603,7 @@ class UserAPIController extends BaseController
                 Auth::user()->NIF_UTILIZADOR, 
                 Auth::user()->PASS_UTILIZADOR, 
                 Auth::user()->EMAIL_UTILIZADOR,
+                $request->USER_QUALIFICATION_ID, 
                 $request->USER_QUALIFICATION_SCHOOL, 
                 $request->USER_QUALIFICATION_DESCRIPTION, 
                 $request->USER_QUALIFICATION_DURATION, );
