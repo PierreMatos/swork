@@ -183,12 +183,12 @@ class UserRepository
 
     }
 
-    public function deleteQualificatons($USER_NIF, $USER_PASS, $USER_EMAIL) 
+    public function deleteQualificatons($USER_NIF, $USER_PASS, $USER_EMAIL, $USER_QUALIFICATION_ID) 
     {
 
         // DB::beginTransaction();
 
-        $user = DB::select("SELECT * FROM API_USER_QUALIFICATION_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
+        $user = DB::select("SELECT * FROM API_USER_QUALIFICATION_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$USER_QUALIFICATION_ID' )");
 
         DB::commit();
 
