@@ -584,8 +584,6 @@ class UserAPIController extends BaseController
         
     public function postQualifications (Request $request){
         
-        dd($request);
-        
         if (Auth::user()){
             
             $jobExperiences = $this->userRepository->addQualificatons(
