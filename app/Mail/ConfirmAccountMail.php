@@ -36,8 +36,7 @@ class ConfirmAccountMail extends Mailable
         $user['email'] = $this->email;
         $user['name'] = $this->name;
 
-        // dd($user);
-        return $this->from("yoursenderemail@mail.com", "Sender Name")
+        return $this->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
         ->subject('Confirmar e-mail')
         ->view('mails.confirm-account', ['user' => $user]);
     }

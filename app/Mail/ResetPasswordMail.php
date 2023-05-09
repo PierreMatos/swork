@@ -33,12 +33,11 @@ class ResetPasswordMail extends Mailable
      */
     public function build()
     {
-        // dd('duh');
         $user['name'] = $this->name;
         $user['token'] = $this->token;
 
-        return $this->from("yoursenderemail@mail.com", "Sender Name")
-        ->subject('Password Reset Link')
+        return $this->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+        ->subject('Recuperação de Password')
         ->view('mails.reset-password', ['user' => $user]);
     }
 }
