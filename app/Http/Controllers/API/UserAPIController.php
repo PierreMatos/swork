@@ -655,7 +655,7 @@ class UserAPIController extends BaseController
                     $resultsArray->push($queryJobExperience);
 
                 }
-                // else{
+                else{
 
                   
                     $queryJobExperience = $this->userRepository->updateQualificatons(
@@ -667,28 +667,28 @@ class UserAPIController extends BaseController
                         $jobExperience['USER_QUALIFICATION_DESCRIPTION'],
                         $jobExperience['USER_QUALIFICATION_DURATION'],
                     );
-                // }
+                }
 
                     $resultsArray->push($queryJobExperience);
             }
 
-            //TODO check if this is needed
+            //TODO check if this is needed.
             $lastValue = last($jobExperiences);
             
-            if($lastValue){
+            // if($lastValue){
 
 
-                $queryJobExperience = $this->userRepository->updateQualificatons(
-                    Auth::user()->NIF_UTILIZADOR, 
-                    Auth::user()->PASS_UTILIZADOR, 
-                    Auth::user()->EMAIL_UTILIZADOR, 
-                    $lastValue['USER_QUALIFICATION_ID'], 
-                    $lastValue['USER_QUALIFICATION_SCHOOL'],
-                    $lastValue['USER_QUALIFICATION_DESCRIPTION'],
-                    $lastValue['USER_QUALIFICATION_DURATION'],
+            //     $queryJobExperience = $this->userRepository->updateQualificatons(
+            //         Auth::user()->NIF_UTILIZADOR, 
+            //         Auth::user()->PASS_UTILIZADOR, 
+            //         Auth::user()->EMAIL_UTILIZADOR, 
+            //         $lastValue['USER_QUALIFICATION_ID'], 
+            //         $lastValue['USER_QUALIFICATION_SCHOOL'],
+            //         $lastValue['USER_QUALIFICATION_DESCRIPTION'],
+            //         $lastValue['USER_QUALIFICATION_DURATION'],
 
-                );
-            }
+            //     );
+            // }
 
 
 
