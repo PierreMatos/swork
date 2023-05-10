@@ -702,7 +702,7 @@ class UserAPIController extends BaseController
         //         $request->USER_QUALIFICATION_DESCRIPTION, 
         //         $request->USER_QUALIFICATION_DURATION, );
 
-        // }
+         }
             
         return json_encode($jobExperiences);
     }
