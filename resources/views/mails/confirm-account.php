@@ -71,7 +71,7 @@
                                         </p>
 
                                         <p style="text-align: center;">
-                                            <a href="<?php echo 'https://myswork.alojamento.pro/api/confirmAccount/'.$user['email'] ?>" class="btn">Confirmar e-mail</a>
+                                            <a href="<?php echo env('APP_URL').'/'.$user['email'] ?>" class="btn">Confirmar e-mail</a>
                                         </p>
 
 
