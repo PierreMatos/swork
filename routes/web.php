@@ -45,7 +45,7 @@ Route::get('/mailable3', function () {
     $name="ze miguel2";
     $email="pierrematos@remotepartner.co";
     $token="45ds6a4d56sad4as564df6";
-    return (Mail::to($email)->send(new \App\Mail\ConfirmAccountMail($email, $name, $token)));
+     (Mail::to($email)->send(new \App\Mail\ConfirmAccountMail($email, $name, $token)));
 
     return new App\Mail\ConfirmAccountMail($email, $name, $token);
 });
