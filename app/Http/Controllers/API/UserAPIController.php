@@ -335,8 +335,7 @@ class UserAPIController extends BaseController
 
             $account->VALIDADO = 'S';
             $account->save();
-
-            return redirect('https://myswork.herokuapp.com/login');
+            return redirect(env('APP_URL').'/login');
 
             return $account;
 

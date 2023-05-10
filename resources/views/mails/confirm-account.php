@@ -36,7 +36,7 @@
 <tr>
     <td class="header" style="width: 100%; height: 100%; background-color: #000; padding: 50px;">
         <a href="https://swork.pt/" style="display: inline-block;">
-            <img src="https://myswork.herokuapp.com/logo.svg" alt="SW Logo" style="width: 187px; height: 100px;">
+            <img src="https://workers.swork.pt/logo.svg" alt="SW Logo" style="width: 187px; height: 100px;">
         </a>
     </td>
 </tr>
@@ -71,7 +71,7 @@
                                         </p>
 
                                         <p style="text-align: center;">
-                                            <a href="<?php echo env('APP_URL').'/'.$user['email'] ?>" class="btn">Confirmar e-mail</a>
+                                            <a href="<?php echo env('APP_URL').'api/confirmAccount/'.$user['email'] ?>" class="btn">Confirmar e-mail</a>
                                         </p>
 
 

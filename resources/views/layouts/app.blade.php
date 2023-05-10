@@ -23,7 +23,7 @@
     <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="flex justify-center pt-8 sm:justify-start sm:pt-0 mr-auto d-none d-lg-block">
-            <img src="https://myswork.herokuapp.com/logo.svg" class="logo" alt="logo">
+            <img src="https://workers.swork.pt/logo.svg" class="logo" alt="logo">
         </div>
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
     </div>
