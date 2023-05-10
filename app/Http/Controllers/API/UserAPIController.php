@@ -647,9 +647,9 @@ class UserAPIController extends BaseController
                         Auth::user()->NIF_UTILIZADOR, 
                         Auth::user()->PASS_UTILIZADOR, 
                         Auth::user()->EMAIL_UTILIZADOR,
-                        $lastValue['USER_QUALIFICATION_SCHOOL'],
-                        $lastValue['USER_QUALIFICATION_DESCRIPTION'],
-                        $lastValue['USER_QUALIFICATION_DURATION'],
+                        $jobExperience['USER_QUALIFICATION_SCHOOL'],
+                        $jobExperience['USER_QUALIFICATION_DESCRIPTION'],
+                        $jobExperience['USER_QUALIFICATION_DURATION'],
 
                     );
                     $resultsArray->push($queryJobExperience);
@@ -662,10 +662,10 @@ class UserAPIController extends BaseController
                         Auth::user()->NIF_UTILIZADOR, 
                         Auth::user()->PASS_UTILIZADOR, 
                         Auth::user()->EMAIL_UTILIZADOR, 
-                        $lastValue['USER_QUALIFICATION_ID'], 
-                        $lastValue['USER_QUALIFICATION_SCHOOL'],
-                        $lastValue['USER_QUALIFICATION_DESCRIPTION'],
-                        $lastValue['USER_QUALIFICATION_DURATION'],
+                        $jobExperience['USER_QUALIFICATION_ID'], 
+                        $jobExperience['USER_QUALIFICATION_SCHOOL'],
+                        $jobExperience['USER_QUALIFICATION_DESCRIPTION'],
+                        $jobExperience['USER_QUALIFICATION_DURATION'],
                     );
                 // }
 
@@ -691,16 +691,6 @@ class UserAPIController extends BaseController
             }
 
 
-        // if (Auth::user()){
-            
-        //     $jobExperiences = $this->userRepository->updateQualificatons(
-        //         Auth::user()->NIF_UTILIZADOR, 
-        //         Auth::user()->PASS_UTILIZADOR, 
-        //         Auth::user()->EMAIL_UTILIZADOR,
-        //         $request->USER_QUALIFICATION_ID, 
-        //         $request->USER_QUALIFICATION_SCHOOL, 
-        //         $request->USER_QUALIFICATION_DESCRIPTION, 
-        //         $request->USER_QUALIFICATION_DURATION, );
 
          }
             
