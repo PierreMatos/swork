@@ -641,7 +641,7 @@ class UserAPIController extends BaseController
             // return json_encode($jobExperiences);
             foreach($jobExperiences as $jobExperience){
 
-                if (is_null($jobExperience['USER_QUALIFICATION_ID'])) {
+                if ( is_null($jobExperience['USER_QUALIFICATION_ID']) || $jobExperience['USER_QUALIFICATION_ID'] == "" ) {
                     
                     $queryJobExperience = $this->userRepository->addQualificatons(
                         Auth::user()->NIF_UTILIZADOR, 
