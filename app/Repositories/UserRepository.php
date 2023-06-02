@@ -831,7 +831,7 @@ class UserRepository
 
         // DB::beginTransaction();
 
-        $file = DB::select("SELECT FIRST 1 ANEXO FROM EMPREGADOS_ANEXOS where codigo_empregado = '$id' NOME_FICHEIRO_ANEXO = '$name'");
+        $file = DB::select("SELECT FIRST 1 ANEXO FROM EMPREGADOS_ANEXOS where codigo_empregado = '$id' and NOME_FICHEIRO_ANEXO = '$name'");
        
         DB::commit();
 
