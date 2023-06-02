@@ -826,6 +826,19 @@ class UserRepository
 
     }
 
+    public function attachmentsGet($id, $name)
+    {
+
+        // DB::beginTransaction();
+
+        $file = DB::select("SELECT FIRST 1 ANEXO FROM EMPREGADOS_ANEXOS where codigo_empregado = '$id' NOME_FICHEIRO_ANEXO = '$name'");
+       
+        DB::commit();
+
+        return $file;
+
+    }
+
     public function offersList($USER_NIF, $USER_PASS, $USER_EMAIL, $DATE)
     {
 

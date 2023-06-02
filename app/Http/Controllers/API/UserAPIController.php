@@ -2128,7 +2128,6 @@ class UserAPIController extends BaseController
 
     }
         
-    // ESCALAS DE TRABALHO
     public function attachmentList(Request $request)
     {
         if (Auth::user()){
@@ -2161,6 +2160,22 @@ class UserAPIController extends BaseController
             
         }
             return json_encode($attachmentsArray);
+    }
+        
+    public function attachmentGet($id, $name)
+    {
+        if (Auth::user()){
+
+            $attachment = $this->userRepository->attachmentsGet(
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR, 
+            $id,
+            $name
+            );
+        }
+
+            return json_encode($attachment);
     }
     
     public function convertUTF8($data) {
