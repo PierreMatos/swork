@@ -2173,7 +2173,9 @@ class UserAPIController extends BaseController
             );
         // }
 
-            return ($attachment);
+        dd($attachment);
+        
+            return file($attachment);
     }
     
     public function convertUTF8($data) {
