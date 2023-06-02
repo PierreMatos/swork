@@ -114,7 +114,7 @@ Route::middleware('auth:api')->group(function(){
     Route::POST('offerapply', 'App\Http\Controllers\API\UserAPIController@offerApply');
 
     Route::POST('/usernewattachment', [UserAPIController::class, 'attachmentNew']);
-    Route::DELETE('/userattachment', [UserAPIController::class, 'attachmentDestroy']);
+    // Route::DELETE('/userattachment', [UserAPIController::class, 'attachmentDestroy']);
     Route::GET('/userlistattachments', [UserAPIController::class, 'attachmentList']);
 
     Route::GET('messages', 'App\Http\Controllers\API\UserAPIController@getMessages');
