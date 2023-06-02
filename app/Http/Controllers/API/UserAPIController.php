@@ -2173,7 +2173,7 @@ class UserAPIController extends BaseController
             );
         // }
 
-        dd($attachment);
+        dd($attachment[0]);
 
             return file($attachment);
     }
