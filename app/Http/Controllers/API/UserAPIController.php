@@ -2173,7 +2173,12 @@ class UserAPIController extends BaseController
             );
         // }
 
-        return ($attachment[0]->ANEXO);
+        return response($attachment)
+            ->withHeaders([
+                'Content-Type' => 'application/pdf',
+            ]);
+
+        return Response ($attachment[0]->ANEXO);
 
             return file($attachment);
     }
