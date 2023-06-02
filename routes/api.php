@@ -20,8 +20,6 @@ use App\Http\Controllers\API\UserAPIController;
 Route::POST('sendEmailConfirmation', 'App\Http\Controllers\API\UserAPIController@sendEmailConfirmation');
 Route::GET('confirmAccount/{email}', 'App\Http\Controllers\API\UserAPIController@confirmAccount');
 
-Route::GET('/userattachment/{id}/{name}', [UserAPIController::class, 'attachmentGet']);
-
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
@@ -114,8 +112,9 @@ Route::middleware('auth:api')->group(function(){
     Route::POST('offerapply', 'App\Http\Controllers\API\UserAPIController@offerApply');
 
     Route::POST('/usernewattachment', [UserAPIController::class, 'attachmentNew']);
-    // Route::DELETE('/userattachment', [UserAPIController::class, 'attachmentDestroy']);
+    Route::DELETE('/userattachment', [UserAPIController::class, 'attachmentDestroy']);
     Route::GET('/userlistattachments', [UserAPIController::class, 'attachmentList']);
+    Route::GET('/userattachment/{id}/{name}', [UserAPIController::class, 'attachmentGet']);
 
     Route::GET('messages', 'App\Http\Controllers\API\UserAPIController@getMessages');
     Route::POST('messages', 'App\Http\Controllers\API\UserAPIController@postMessages');
