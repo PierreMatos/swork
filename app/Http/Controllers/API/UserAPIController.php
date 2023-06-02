@@ -2173,9 +2173,16 @@ class UserAPIController extends BaseController
             );
         // }
 
+        $file = File::get($attachment);
+        $response = Response::make($file, 200);
+        $response->header('Content-Type', 'application/pdf');
+        return $response;
+
+        Response::header('Content-type', 'application/pdf');
+        
         return response($attachment)
             ->withHeaders([
-                'Content-Type' => 'application/pdf',
+                'Content-Type' => 'application/docx',
             ]);
 
         return Response ($attachment[0]->ANEXO);
