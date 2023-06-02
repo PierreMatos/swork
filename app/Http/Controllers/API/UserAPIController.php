@@ -2176,6 +2176,9 @@ class UserAPIController extends BaseController
             );
         // }
 
+        return response($attachment, 200)
+                  ->header('Content-Type', 'application/pdf');
+
         $response = Response::make($attachment, 200);
         $response->header('Content-Type', 'application/pdf');
         return $response;
