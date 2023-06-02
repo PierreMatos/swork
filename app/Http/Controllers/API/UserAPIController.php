@@ -2183,7 +2183,7 @@ class UserAPIController extends BaseController
 
 
         return response($att, 200)
-                  ->header('Content-Type', 'application/pdf');
+                  ->header('Content-Type', 'application/binary');
 
         $response = Response::make($attachment, 200);
         $response->header('Content-Type', 'application/pdf');
