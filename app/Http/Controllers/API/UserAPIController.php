@@ -2167,20 +2167,38 @@ class UserAPIController extends BaseController
         
     public function attachmentGet($id, $name)
     {
-
-        if (Auth::user()){
+        // header('Content-Type: application/docx');
+        // if (Auth::user()){
 
             $attachment = $this->userRepository->attachmentsGet(
             $id,
             $name
             );
-        }
+        // }
 
         $att = $attachment[0]->ANEXO;
+        // $headers = ['Content-Type' => 'application/pdf'];
+        // return response()->download($att, $name, $headers);
+
+
 
         return response($att, 200)
                   ->header('Content-Type', 'application/binary');
 
+        $response = Response::make($attachment, 200);
+        $response->header('Content-Type', 'application/pdf');
+        return $response;
+
+        Response::header('Content-type', 'application/pdf');
+        
+        return response($attachment)
+            ->withHeaders([
+                'Content-Type' => 'application/docx',
+            ]);
+
+        return Response ($attachment[0]->ANEXO);
+
+            return file($attachment);
     }
     
     public function convertUTF8($data) {
