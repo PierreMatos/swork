@@ -2167,9 +2167,6 @@ class UserAPIController extends BaseController
         if (Auth::user()){
 
             $attachment = $this->userRepository->attachmentsGet(
-            Auth::user()->NIF_UTILIZADOR, 
-            Auth::user()->PASS_UTILIZADOR, 
-            Auth::user()->EMAIL_UTILIZADOR, 
             $id,
             $name
             );
