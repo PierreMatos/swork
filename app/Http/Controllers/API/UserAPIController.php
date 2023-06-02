@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Auth\ConfirmAccountMail;
+use Illuminate\Support\Facades\File;
 
 class UserAPIController extends BaseController
 {
