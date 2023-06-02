@@ -2164,13 +2164,14 @@ class UserAPIController extends BaseController
         
     public function attachmentGet($id, $name)
     {
-        if (Auth::user()){
+        // header('Content-Type: application/docx');
+        // if (Auth::user()){
 
             $attachment = $this->userRepository->attachmentsGet(
             $id,
             $name
             );
-        }
+        // }
 
             return ($attachment);
     }
