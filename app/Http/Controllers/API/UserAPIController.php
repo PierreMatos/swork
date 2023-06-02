@@ -2176,7 +2176,7 @@ class UserAPIController extends BaseController
             );
         // }
 
-        $att = $attachment[0]->ANEXO
+        $att = $attachment[0]->ANEXO;
         $headers = ['Content-Type' => 'application/pdf'];
         return response()->download($att, $name, $headers);
 
