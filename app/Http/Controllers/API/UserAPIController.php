@@ -18,6 +18,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Auth\ConfirmAccountMail;
 use Illuminate\Support\Facades\File;
+use Response;
+
 
 class UserAPIController extends BaseController
 {
