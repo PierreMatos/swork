@@ -116,7 +116,7 @@ class UserAPIController extends BaseController
         
         if($validator->fails()){
             
-            dd($validator->errors());
+            dd($validator->errors()->first());
             return response()->json($validator->errors(), 400);
             
             return $validator->errors()->toJson();
