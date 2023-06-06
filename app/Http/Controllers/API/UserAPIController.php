@@ -114,8 +114,8 @@ class UserAPIController extends BaseController
             'EMAIL_UTILIZADOR' => 'required|unique:EMPREGADOS_UTILIZADORES_PORTAL',
         ],
         [
-            'NIF_UTILIZADOR.unique' => 'vai me a venda',
-            'EMAIL_UTILIZADOR.unique' => 'vai me a venda'
+            'NIF_UTILIZADOR.unique' => 'Este NIF já se encontra registado',
+            'EMAIL_UTILIZADOR.unique' => 'Este e-mail já se encontra registado'
         ]);
         
         if($validator->fails()){
