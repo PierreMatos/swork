@@ -114,7 +114,7 @@ class UserAPIController extends BaseController
             'EMAIL_UTILIZADOR' => 'required|unique:EMPREGADOS_UTILIZADORES_PORTAL',
         ],
         [
-            'NIF_UTILIZADOR.unique' => 'vai me a venda'
+            'NIF_UTILIZADOR.unique' => 'vai me a venda',
             'EMAIL_UTILIZADOR.unique' => 'vai me a venda'
         ]);
         
