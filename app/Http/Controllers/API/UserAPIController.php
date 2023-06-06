@@ -112,6 +112,9 @@ class UserAPIController extends BaseController
         $validator = Validator::make($request->all(), [
             'NIF_UTILIZADOR' => 'required|unique:EMPREGADOS_UTILIZADORES_PORTAL',
             'EMAIL_UTILIZADOR' => 'required|unique:EMPREGADOS_UTILIZADORES_PORTAL',
+        ],
+        [
+            'EMAIL_UTILIZADOR.unique' => 'vai me a venda'
         ]);
         
         if($validator->fails()){
