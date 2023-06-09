@@ -29,8 +29,6 @@ class ResetPasswordController extends Controller
      * @var string
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
-    protected $redirectTo = 'www.google.com';
-
 
     public function rules(){
         $rules = 
@@ -81,7 +79,8 @@ class ResetPasswordController extends Controller
     $user->PASS_UTILIZADOR = Hash::make($password);
  
     $user->save();
-    
+    return redirect()->to('http://heera.it');
+
     // dd($user);
  
     // Auth::login($user);
