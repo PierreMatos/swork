@@ -318,7 +318,8 @@ class UserAPIController extends BaseController
                             $EMAIL,
                             $qualification['USER_QUALIFICATION_SCHOOL'],
                             $qualification['USER_QUALIFICATION_DESCRIPTION'],
-                            $qualification['USER_QUALIFICATION_DURATION'],
+                            $qualification['USER_QUALIFICATION_DURATION']
+                        );
     
                         $resultsArray->push($queryQualification);
     
