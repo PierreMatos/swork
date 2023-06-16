@@ -303,6 +303,29 @@ class UserAPIController extends BaseController
                 
                 }
 
+
+                // QUALIFICATIONS FORMAÇAO PROFISSIONAL
+                $qualifications = $request->input('qualifications');
+
+
+                if(is_null($qualifications)){
+
+                    foreach($qualifications as $qualification){
+
+                        $queryqualification = $this->userRepository->addQualificatons(
+                            $NIF, 
+                            $PASS, 
+                            $EMAIL,
+                            $qualification['USER_QUALIFICATION_SCHOOL'],
+                            $qualification['USER_QUALIFICATION_DESCRIPTION'],
+                            $qualification['USER_QUALIFICATION_DURATION'],
+    
+                        $resultsArray->push($queryQualification);
+    
+                    }
+                
+                }
+
                 Mail::to($EMAIL)->send(new \App\Mail\ConfirmAccountMail($EMAIL, $USER_NAME));
 
             }
