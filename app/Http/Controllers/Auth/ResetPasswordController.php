@@ -79,7 +79,8 @@ class ResetPasswordController extends Controller
     $user->PASS_UTILIZADOR = Hash::make($password);
  
     $user->save();
-    return redirect()->to('http://heera.it');
+    return redirect(env('APP_URL').'/login');
+    // return redirect()->to('http://heera.it');
 
     // dd($user);
  
