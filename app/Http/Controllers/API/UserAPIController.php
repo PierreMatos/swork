@@ -342,12 +342,11 @@ class UserAPIController extends BaseController
     }
 
 
-    public function sendEmailConfirmation($user){
-        
-        $user = $request->input();
-        $name = $request->name;
-        $email = $request->email;
-        $token = $request->token;
+    public function sendEmailConfirmation(Request $user){
+ 
+        $name = $user->name;
+        $email = $user->email;
+        $token = $user->token;
 
         Mail::to($email)->send(new \App\Mail\ConfirmAccountMail($email, $name, $token));
 
