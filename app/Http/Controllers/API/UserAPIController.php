@@ -367,7 +367,8 @@ class UserAPIController extends BaseController
 
             $account->VALIDADO = 'S';
             $account->save();
-            return redirect(env('APP_URL').'/login');
+            return redirect('http://workers.swork.pt/login');
+            // return redirect(env('APP_URL').'/login');
 
             return $account;
 
