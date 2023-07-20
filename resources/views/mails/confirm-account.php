@@ -71,7 +71,7 @@
                                         </p>
 
                                         <p style="text-align: center;">
-                                            <a href="https://api.swork.pt/api/confirmAccount/"<?php echo $user['email'] ?> class="btn">Confirmar e-mail</a>
+                                            <a href="https://api.swork.pt/api/confirmAccount/<?php echo $user['email'] ?>" class="btn">Confirmar e-mail</a>
                                         </p>
 
 
