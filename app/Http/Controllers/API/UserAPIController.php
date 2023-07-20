@@ -174,6 +174,8 @@ class UserAPIController extends BaseController
              'USER_COMMUNICATION_TYPE' => $USER_COMMUNICATION_TYPE,
              'USER_NEWSLETTER' => $USER_NEWSLETTER,
              'USER_PRIVACY_POLICY' => $USER_PRIVACY_POLICY,
+             'USER_SEX' => $USER_SEX,
+             'USER_WHATSAPP' => $USER_WHATSAPP,
             
             ]);
             
