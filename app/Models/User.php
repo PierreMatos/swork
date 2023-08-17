@@ -57,7 +57,7 @@ class User extends Authenticatable implements JWTSubject, CanResetPassword
         'USER_TELEPHONE',
         'USER_DISTRICT_ID',
         'USER_COUNTY_ID',
-        'USER_LOCAL_ID'
+        'USER_LOCAL_ID',
         'USER_HAS_CAR',
         'USER_HAS_DRIVERS_LICENCE',
         'USER_COMMUNICATION_TYPE',
