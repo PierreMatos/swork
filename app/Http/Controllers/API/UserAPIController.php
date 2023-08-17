@@ -573,8 +573,12 @@ class UserAPIController extends BaseController
                 $input = $request->all();
 
         //find (id) e get '$USER_NIF', '$USER_PASS', '$USER_EMAIL'
-        $user = $this->userRepository->delete($request->USER_NIF, $request->USER_PASS, $request->USER_EMAIL);
-        return json_encode($user);
+        $user = $this->userRepository->delete(
+            Auth::user()->NIF_UTILIZADOR, 
+            Auth::user()->PASS_UTILIZADOR, 
+            Auth::user()->EMAIL_UTILIZADOR);
+
+            return json_encode($user);
         
     }
     
