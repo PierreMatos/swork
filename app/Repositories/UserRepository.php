@@ -111,7 +111,7 @@ class UserRepository
     
     public function delete($USER_NIF, $USER_PASS, $USER_EMAIL) {
         
-        DB::beginTransaction();
+        // DB::beginTransaction();
          
         $user = DB::select("SELECT * FROM API_USER_DELETE($USER_NIF, '$USER_PASS', '$USER_EMAIL')");
        
