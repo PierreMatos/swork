@@ -89,6 +89,7 @@ class UserAPIController extends BaseController
         $USER_ADDRESS_2 = $request->USER_ADDRESS_2 ?? '';
         $USER_POSTAL_CODE = $request->USER_POSTAL_CODE ?? '';
         $USER_TELEPHONE = $request->USER_TELEPHONE ?? '';
+        $USER_WHATSAPP = $request->USER_WHATSAPP ?? '';
         $USER_BIRTHDATE = $request->USER_BIRTHDATE ?? '';
         $USER_SOCIAL_SECURITY_NUMBER = $request->USER_SOCIAL_SECURITY_NUMBER ?? '';
         $USER_COUNTRY_ID = $request->USER_COUNTRY_ID ?? '';
@@ -167,6 +168,7 @@ class UserAPIController extends BaseController
              'USER_SOCIAL_SECURITY_NUMBER' => $USER_SOCIAL_SECURITY_NUMBER,
              'USER_SEX' => $USER_SEX,
              'USER_TELEPHONE' => $USER_TELEPHONE,
+             'USER_WHATSAPP' => $USER_WHATSAPP,
              'USER_DISTRICT_ID' => $USER_DISTRICT_ID,
              'USER_COUNTY_ID' => $USER_COUNTY_ID,
              'USER_HAS_CAR' => $USER_HAS_CAR,
@@ -175,7 +177,6 @@ class UserAPIController extends BaseController
              'USER_NEWSLETTER' => $USER_NEWSLETTER,
              'USER_PRIVACY_POLICY' => $USER_PRIVACY_POLICY,
              'USER_SEX' => $USER_SEX,
-             'USER_WHATSAPP' => $USER_WHATSAPP,
             
             ]);
             

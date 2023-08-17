@@ -55,6 +55,7 @@ class User extends Authenticatable implements JWTSubject, CanResetPassword
         'USER_SOCIAL_SECURITY_NUMBER',
         'USER_SEX',
         'USER_TELEPHONE',
+        'USER_WHATSAPP',
         'USER_DISTRICT_ID',
         'USER_COUNTY_ID',
         'USER_LOCAL_ID',
@@ -67,7 +68,6 @@ class User extends Authenticatable implements JWTSubject, CanResetPassword
         'USER_ADDRESS2',
         'EMAIL',
         'USER_SEX',
-        'USER_WHATSAPP',
         // 'ID'
     ];
 
@@ -102,6 +102,7 @@ class User extends Authenticatable implements JWTSubject, CanResetPassword
         'USER_SOCIAL_SECURITY_NUMBER' => 'integer',
         'USER_SEX' => 'string',
         'USER_TELEPHONE' => 'integer',
+        'USER_WHATSAPP' => 'string',
         'USER_DISTRICT_ID' => 'integer',
         'USER_COUNTY_ID' => 'integer',
         'USER_LOCAL_ID' => 'integer',
@@ -114,7 +115,6 @@ class User extends Authenticatable implements JWTSubject, CanResetPassword
         'USER_ADDRESS_2' => 'string',
         'EMAIL' => 'string',
         'USER_SEX' => 'string',
-        'USER_WHATSAPP' => 'string',
 
 
         // 'ID' => 'integer',
