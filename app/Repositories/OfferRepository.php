@@ -35,7 +35,7 @@ class OfferRepository
         }
        
 
-        $offers = DB::select("SELECT * FROM API_OFFERS_LIST(NULL) $whereClause ");
+        $offers = DB::select("SELECT * FROM API_OFFERS_LIST(NULL) $whereClause ORDER BY CREATED_DATE DESCENDING");
 
 
         DB::commit();
