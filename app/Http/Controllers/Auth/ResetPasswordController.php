@@ -28,7 +28,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = 'https://www.google.com';
+    protected $redirectTo = 'https://workers.swork.pt/login';
 
     public function rules(){
         $rules = 
