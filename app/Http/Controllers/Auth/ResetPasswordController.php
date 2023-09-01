@@ -75,7 +75,7 @@ class ResetPasswordController extends Controller
     protected function resetPassword($user, $password)
 {
     
-    dd('hey');
+    dd(redirect()->to('https://workers.swork.pt/login'));
     $user->PASS_UTILIZADOR = Hash::make($password);
  
     $user->save();
