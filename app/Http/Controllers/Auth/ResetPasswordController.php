@@ -28,7 +28,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = 'https://www.google.com';
 
     public function rules(){
         $rules = 
@@ -77,6 +77,7 @@ class ResetPasswordController extends Controller
     
     return redirect()->away('https://www.google.com');
 
+    dd('hey');
 
     return redirect()->to('https://workers.swork.pt/login');
     dd(redirect()->to('https://workers.swork.pt/login'));
