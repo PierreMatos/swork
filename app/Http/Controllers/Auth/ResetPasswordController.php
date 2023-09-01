@@ -75,11 +75,11 @@ class ResetPasswordController extends Controller
     protected function resetPassword($user, $password)
 {
     
-    // dd('hey');
+    dd('hey');
     $user->PASS_UTILIZADOR = Hash::make($password);
  
     $user->save();
-    // return redirect(env('PWA_URL').'/login');
+    return redirect(env('PWA_URL').'/login');
     return redirect()->to('https://workers.swork.pt/login');
 
     // dd($user);
