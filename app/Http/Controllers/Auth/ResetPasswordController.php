@@ -79,8 +79,8 @@ class ResetPasswordController extends Controller
     $user->PASS_UTILIZADOR = Hash::make($password);
  
     $user->save();
-    return redirect(env('PWA_URL').'/login');
-    // return redirect()->to('http://heera.it');
+    // return redirect(env('PWA_URL').'/login');
+    return redirect()->to('https://workers.swork.pt/login');
 
     // dd($user);
  
