@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect('www.jafoste.pt');
+                return redirect('https://workers.swork.pt/login');
             }
         }
 

@@ -28,7 +28,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'https://www.google.com';
+    // protected $redirectTo = 'https://www.google.com';
 
     public function rules(){
         $rules = 
@@ -75,16 +75,16 @@ class ResetPasswordController extends Controller
     protected function resetPassword($user, $password)
 {
     
-    return redirect()->away('https://www.google.com');
+    // return redirect()->away('https://www.google.com');
 
-    dd('hey');
+    // dd('hey');
 
-    return redirect()->to('https://workers.swork.pt/login');
-    dd(redirect()->to('https://workers.swork.pt/login'));
+    // return redirect()->to('https://workers.swork.pt/login');
+    // dd(redirect()->to('https://workers.swork.pt/login'));
     $user->PASS_UTILIZADOR = Hash::make($password);
  
     $user->save();
-    return redirect(env('PWA_URL').'/login');
+    // return redirect(env('PWA_URL').'/login');
 
     // dd($user);
  
