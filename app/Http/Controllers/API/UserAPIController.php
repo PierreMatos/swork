@@ -313,8 +313,8 @@ class UserAPIController extends BaseController
                 if($qualifications){
                     
                     foreach($qualifications as $qualification){
+                        
                         dd($qualification);
-
                         $queryqualification = $this->userRepository->addQualificatons(
                             $NIF, 
                             $PASS, 
