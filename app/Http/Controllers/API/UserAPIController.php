@@ -762,6 +762,7 @@ class UserAPIController extends BaseController
 
         }
             
+        dd($jobExperiences);
         return json_encode($jobExperiences);
     }
 
