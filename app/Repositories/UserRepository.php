@@ -137,6 +137,13 @@ class UserRepository
             $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_NEW($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$COMPANY', '$JOB', '$START_DATE', null)");
         }
         
+        if($END_DATE){
+            
+            $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_NEW($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$COMPANY', '$JOB', '$START_DATE', '$END_DATE')");
+        }else{
+            $user = DB::select("SELECT * FROM API_USER_JOB_EXPERIENCE_NEW($USER_NIF, '$USER_PASS', '$USER_EMAIL', '$COMPANY', '$JOB', '$START_DATE', null)");
+        }
+        
         // DB::commit();
 
         return $user;
