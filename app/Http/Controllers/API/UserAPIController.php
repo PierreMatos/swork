@@ -310,7 +310,7 @@ class UserAPIController extends BaseController
                 // QUALIFICATIONS FORMAÇAO PROFISSIONAL
                 $qualifications = $request->input('qualifications_array');
 
-                if($qualifications){
+                if(!is_null($qualifications)){
                     
                     foreach($qualifications as $qualification){
                         
@@ -323,7 +323,6 @@ class UserAPIController extends BaseController
                             $qualification['USER_QUALIFICATION_DURATION']
                         );
                         
-                        dd($queryqualification);
                         $resultsArray->push($queryQualification);
     
                     }
