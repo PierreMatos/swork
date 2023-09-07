@@ -516,7 +516,7 @@ class UserRepository
 
         DB::beginTransaction();
 
-        $skills = DB::select("SELECT * FROM EMPREGADOS_HABILITACOES");
+        $skills = DB::select("SELECT * FROM EMPREGADOS_HABILITACOES WHERE ORDEM = 1");
        
         DB::commit();
 
