@@ -762,8 +762,23 @@ class UserAPIController extends BaseController
 
         }
             
-        dd($jobExperiences);
-        return json_encode($jobExperiences);
+        $jobExperiencesArray = collect([]);
+
+        foreach ($jobExperiences as $jobExperience){
+
+            $all = collect([
+                'USER_EXPERIENCE_ID' => $this->convertUTF8($jobExperience->USER_EXPERIENCE_ID),
+                'USER_EXPERIENCE_COMPANY' => $this->convertUTF8($jobExperience->USER_EXPERIENCE_COMPANY),
+                'USER_EXPERIENCE_FUNCTION' => $this->convertUTF8($jobExperience->USER_EXPERIENCE_FUNCTION),
+                'USER_EXPERIENCE_FROM_DATE' => $this->convertUTF8($jobExperience->USER_EXPERIENCE_FROM_DATE),
+                'USER_EXPERIENCE_TO_DATE' => $this->convertUTF8($jobExperience->USER_EXPERIENCE_TO_DATE),
+            ]);
+
+            $jobExperiencesArray->push($all);
+            
+        }
+
+        return json_encode($jobExperiencesArray);
     }
 
     public function updateJobExperience (Request $request){
