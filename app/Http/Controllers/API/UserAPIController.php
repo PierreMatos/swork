@@ -260,6 +260,7 @@ class UserAPIController extends BaseController
                 //Job Experience
                 $jobExperiences = $request->input('jobs_array');
 
+                dd(is_null($jobExperiences));
                 if(is_null($jobExperiences)){
 
                     foreach($jobExperiences as $jobExperience){
