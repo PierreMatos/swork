@@ -308,7 +308,7 @@ class UserAPIController extends BaseController
 
 
                 // QUALIFICATIONS FORMAÇAO PROFISSIONAL
-                $qualifications = $request->input('qualifications');
+                $qualifications = $request->input('qualifications_array');
 
                 if($qualifications){
 
