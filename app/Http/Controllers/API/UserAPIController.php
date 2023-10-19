@@ -2026,8 +2026,21 @@ class UserAPIController extends BaseController
                 Auth::user()->PASS_UTILIZADOR, 
                 Auth::user()->EMAIL_UTILIZADOR);
                 
-                dd($messages);
-        return json_encode($messages);
+                foreach ($messages as $message){
+
+                    $all = collect( [
+                        'MESSAGE_ID' => ($message->MESSAGE_ID),
+                        'MESSAGE_DATE_TIME' => ($message->MESSAGE_DATE_TIME),
+                        'MESSAGE_SUBJECT' => $this->convertUTF8($message->MESSAGE_SUBJECT),
+                        'MESSAGE_TEXT' => $this->convertUTF8($message->MESSAGE_TEXT),
+                        
+                    ]);
+        
+                    $messagesArray->push($all);
+                    
+                }
+
+            return json_encode($messagesArray);
 
     }
 
