@@ -2026,6 +2026,8 @@ class UserAPIController extends BaseController
                 Auth::user()->PASS_UTILIZADOR, 
                 Auth::user()->EMAIL_UTILIZADOR);
                 
+            $messagesArray = collect([]);
+
                 foreach ($messages as $message){
 
                     $all = collect( [
