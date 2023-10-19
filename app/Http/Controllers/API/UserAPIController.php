@@ -2015,18 +2015,18 @@ class UserAPIController extends BaseController
             Auth::user()->PASS_UTILIZADOR, 
             Auth::user()->EMAIL_UTILIZADOR);
 
-            dd($messages);
-        return json_encode($messages);
-
-    }
-
-    public function getMessagesSent(Request $request) {
-
-        $messages = $this->userRepository->messagesSent(
-            Auth::user()->NIF_UTILIZADOR, 
-            Auth::user()->PASS_UTILIZADOR, 
-            Auth::user()->EMAIL_UTILIZADOR);
-
+            return json_encode($messages);
+            
+        }
+        
+        public function getMessagesSent(Request $request) {
+            
+            $messages = $this->userRepository->messagesSent(
+                Auth::user()->NIF_UTILIZADOR, 
+                Auth::user()->PASS_UTILIZADOR, 
+                Auth::user()->EMAIL_UTILIZADOR);
+                
+                dd($messages);
         return json_encode($messages);
 
     }
