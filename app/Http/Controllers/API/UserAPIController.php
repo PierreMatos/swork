@@ -2015,6 +2015,7 @@ class UserAPIController extends BaseController
             Auth::user()->PASS_UTILIZADOR, 
             Auth::user()->EMAIL_UTILIZADOR);
 
+            dd($messages);
         return json_encode($messages);
 
     }
